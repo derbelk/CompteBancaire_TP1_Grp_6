@@ -12,7 +12,7 @@ import java.net.Socket;
  * @version 1.1
  * @since 2023-09-01
  */
-public class Connexion {
+public class Connexion{
 
 	private Socket 				socket;
 	private PrintWriter 		os;
@@ -80,7 +80,7 @@ public class Connexion {
 	{
 		try
 		{
-		  //envoyer("Connexion closed !");
+		  envoyer("END");
 		  is.close();
 		  os.close();			
 		  socket.close();
