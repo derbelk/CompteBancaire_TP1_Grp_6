@@ -90,13 +90,12 @@ public class ServeurBanque extends Serveur {
         Iterator<Connexion> iterator = connectes.iterator();
         ConnexionBanque inactif ;
         while (iterator.hasNext()){
-            int i=0;
-            inactif = (ConnexionBanque)connectes.get(i);
+            inactif = (ConnexionBanque)iterator.next();
             if(inactif.estInactifDepuis(DELAI_INACTIVITE)){
-               // inactif.envoyer("END");
+                inactif.envoyer("END");
+                inactif.close();
                 connectes.remove(inactif);
             }
-            i++;
         }
     }
 }
