@@ -153,11 +153,12 @@ public class Banque implements Serializable {
         if (Shecklettre && Shecktailp)
             PinCptOk = true;
 
-        if (NumCptOk && PinCptOk){
+        if (NumCptOk && PinCptOk)
 
-        }
+            return true;
 
-            return this.comptes.add(new CompteClient(numCompteClient, nip)); //À modifier
+
+        return this.comptes.add(new CompteClient(numCompteClient, nip));//À modifier
     }
 
     /**
