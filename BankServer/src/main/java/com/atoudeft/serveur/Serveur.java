@@ -26,7 +26,7 @@ public class Serveur implements Lecteur {
     //Liste des connectés au serveur :
     protected final Vector<Connexion> connectes = new Vector<>();
 
-    //Nouveaux clients qui ne se sont pas encore "identifiés" :
+    //Nouveaux clients qui ne se sont pas encore "identifiés." :
     private final Vector<Connexion> nouveaux = new Vector<>();
     //Ce thread s'occupe d'interagir avec les nouveaux pour valider leur connexion :
     private Thread threadNouveaux;
