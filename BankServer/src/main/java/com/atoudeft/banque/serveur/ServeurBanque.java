@@ -93,7 +93,7 @@ public class ServeurBanque extends Serveur {
             int i=0;
             inactif = (ConnexionBanque)connectes.get(i);
             if(inactif.estInactifDepuis(DELAI_INACTIVITE)){
-                inactif.envoyer("END");
+               // inactif.envoyer("END");
                 connectes.remove(inactif);
             }
             i++;

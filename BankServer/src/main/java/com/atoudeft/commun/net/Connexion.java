@@ -80,7 +80,7 @@ public class Connexion{
 	{
 		try
 		{
-		  envoyer("END");
+		  envoyer("ENVOIE FINAL");
 		  is.close();
 		  os.close();			
 		  socket.close();
