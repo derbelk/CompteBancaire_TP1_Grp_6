@@ -4,6 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Banque implements Serializable {
@@ -106,7 +107,7 @@ public class Banque implements Serializable {
                 . Créer un compte-client avec le numéro et le nip;
                 . Générer (avec CompteBancaire.genereNouveauNumero()) un nouveau numéro de compte bancaire qui n'est
                   pas déjà utilisé;
-                . Créer un compte-chèque avec ce numéro et l'ajouter au compte-client;
+                . Créer un compte-chèque aver ce numéro et l'ajouter au compte-client;
                 . Ajouter le compte-client à la liste des comptes et retourner true.
          */
 
@@ -168,7 +169,11 @@ public class Banque implements Serializable {
      * @return numéro du compte-chèque du client ayant le numéro de compte-client
      */
     public String getNumeroCompteParDefaut(String numCompteClient) {
-        //À compléter : retourner le numéro du compte-chèque du compte-client.
-        return null; //À modifier
+        Iterator<CompteClient> iterator = comptes.iterator();
+        CompteClient client;
+        String numCompteCheque="";
+        while (iterator.hasNext()){
+        }
+        return numCompteCheque;
     }
 }
