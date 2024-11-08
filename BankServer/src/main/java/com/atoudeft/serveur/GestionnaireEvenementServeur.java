@@ -1,12 +1,18 @@
 package com.atoudeft.serveur;
 
 import com.atoudeft.banque.Banque;
+import com.atoudeft.banque.CompteBancaire;
+import com.atoudeft.banque.CompteClient;
 import com.atoudeft.banque.serveur.ConnexionBanque;
 import com.atoudeft.banque.serveur.ServeurBanque;
 import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 /**
  * Cette classe représente un gestionnaire d'événement d'un serveur. Lorsqu'un serveur reçoit un texte d'un client,
  * il crée un événement à partir du texte reçu et alerte ce gestionnaire qui réagit en gérant l'événement.
@@ -79,6 +85,27 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         else
                             cnx.envoyer("NOUVEAU NO "+t[0]+" existe");
                     }
+                    break;
+
+                case "CONNECT":
+                    Scanner clavier = new Scanner(System.in);
+                    String num, niP;
+
+                    cnx.envoyer("Numéro de compte-client:");
+                    num = clavier.next();
+
+                    cnx.envoyer("Veuillez entrer votre NIP:");
+                    niP = clavier.next();
+                    Iterator <Connexion> iterator = serveur.connectes.iterator();
+
+                    while (iterator.hasNext()){
+                        cnx = (ConnexionBanque) iterator.next();
+                        if (num.equals(cnx.getNumeroCompteClient())){
+                            cnx.envoyer("CONNECT NO");
+                        }
+                    }
+
+
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default: //Renvoyer le texte recu convertit en majuscules :
