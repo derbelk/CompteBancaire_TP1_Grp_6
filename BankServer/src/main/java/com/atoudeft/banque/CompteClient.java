@@ -20,6 +20,13 @@ public class CompteClient implements Serializable {
         this.nip = nip;
         comptes = new ArrayList<>();
     }
+    /**
+     *Cette méthode est ajoutée pour accéder aux comptes bancaires du client (Compte chèque ou éventuellement Compte Epargne !)
+
+     */
+    public List<CompteBancaire> getComptesBancaire(){
+        return  comptes;
+    }
 
     /**
      * Ajoute un compte bancaire au compte-client.

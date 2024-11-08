@@ -8,7 +8,7 @@ public  class CompteCheque extends CompteBancaire{
      * @param type   type du compte
      */
     public CompteCheque(String numero, TypeCompte type) {
-        super(numero, type);
+        super(numero, TypeCompte.CHEQUE);
     }
 
     @Override

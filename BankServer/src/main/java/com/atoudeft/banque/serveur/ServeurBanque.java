@@ -18,7 +18,7 @@ import java.util.ListIterator;
  */
 public class ServeurBanque extends Serveur {
 //    public static final int DELAI_INACTIVITE = 5000;
-    public static final int DELAI_INACTIVITE = 3000;
+    public static final int DELAI_INACTIVITE = 300000;
     //Référence vers la banque gérée par ce serveur :
     private Banque banque;
     //Thread qui supprime les connexions inactives :

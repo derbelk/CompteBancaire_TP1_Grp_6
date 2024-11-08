@@ -169,13 +169,26 @@ public class Banque implements Serializable {
      * @return numéro du compte-chèque du client ayant le numéro de compte-client
      */
     public String getNumeroCompteParDefaut(String numCompteClient) {
-        String numCompteCheque="";
-        CompteClient cheque;
-        cheque = this.getCompteClient(numCompteClient);
-        if(cheque == null){
-            System.out.println("Ce client n'as pas de Compte chèque");
-        }else numCompteCheque = cheque.toString();
-        return numCompteCheque;
+        CompteClient compteClient = getCompteClient(numCompteClient);
+        String numeroCompteCheque="PAS DE NUMÉRO DE COMPTE CHÈQUE !";
+        if(compteClient != null){
+            Iterator<CompteBancaire> iterator = compteClient.getComptesBancaire().iterator();
+            CompteBancaire compte;
+            while (iterator.hasNext()){
+                 compte = iterator.next();
+                 if(compte.getType().compareTo(TypeCompte.CHEQUE)==0){
+                     numeroCompteCheque = compte.getNumero();
+                     return numeroCompteCheque;
+                 } else return numeroCompteCheque;
+            }
+        }else  System.out.println("Ce numéro de Compte Client ne correspond à aucun Compte Client !");
+        return numeroCompteCheque;
 }
+    /**
+     *CETTE MÉTHODE EST UTILISÉE POUR VÉRIFIER SI LE CLIENT POSSÈDE UN COMPTE ÉPARGNE !
+     */
+    public boolean verifierCompteEpargne(){
+        return true;
+    }
 
 }
