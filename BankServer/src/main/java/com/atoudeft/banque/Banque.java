@@ -169,11 +169,13 @@ public class Banque implements Serializable {
      * @return numéro du compte-chèque du client ayant le numéro de compte-client
      */
     public String getNumeroCompteParDefaut(String numCompteClient) {
-        Iterator<CompteClient> iterator = comptes.iterator();
-        CompteClient client;
         String numCompteCheque="";
-        while (iterator.hasNext()){
-        }
+        CompteClient cheque;
+        cheque = this.getCompteClient(numCompteClient);
+        if(cheque == null){
+            System.out.println("Ce client n'as pas de Compte chèque");
+        }else numCompteCheque = cheque.toString();
         return numCompteCheque;
-    }
+}
+
 }
