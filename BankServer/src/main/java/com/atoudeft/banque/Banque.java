@@ -117,8 +117,7 @@ public class Banque implements Serializable {
         boolean pinCptOk = false;
         boolean checkChiffre = false;
         boolean checkMaj = false;
-        boolean checkmin = false;
-        boolean checkTail = false;
+        Boolean compteCree = false;
         int taillech = numCompteClient.length();
         char carac;
         char carap;
@@ -142,8 +141,6 @@ public class Banque implements Serializable {
         }
         // Ici nous allons vérifier le pin fourni
 
-        boolean checklettre = false;
-        boolean checktailp = false;
         int tailp = nip.length();
 
         if (tailp < 4 || tailp > 5){
@@ -161,12 +158,14 @@ public class Banque implements Serializable {
                 }
         }
 
-        if (numCptOk && pinCptOk)
+        if (numCptOk && pinCptOk) {
+            CompteClient compteClient = new CompteClient(numCompteClient, nip);
+            comptes.add(compteClient);
+            compteCree = true;
+        }
 
-            return true;
-
-
-        return this.comptes.add(new CompteClient(numCompteClient, nip));//À modifier
+        return compteCree;
+        //return this.comptes.add(new CompteClient(numCompteClient, nip));//À modifier
     }
 
     /**
