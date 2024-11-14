@@ -113,6 +113,29 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     if(cnx.estInactifDepuis(3000)){
                         cnx.envoyer("EPARGNE NO");
                     }
+                    break;
+
+                case "SELECT" :
+                    Scanner clavier1 = new Scanner(System.in);
+                    String[]  choixcpt;
+                    //cnx.envoyer("SELECT cheque");
+                    //cnx.envoyer("SELECT epargne");
+                    if (cnx.getNumeroCompteClient()==null) {
+                        cnx.envoyer("aucun compte connecte");
+                        break;
+                    }
+                    argument = evenement.getArgument();
+                    choixcpt = argument.split(" ");
+
+
+
+
+                    break;
+
+
+
+
+
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default: //Renvoyer le texte recu convertit en majuscules :
                     msg = (evenement.getType() + " " + evenement.getArgument()).toUpperCase();
