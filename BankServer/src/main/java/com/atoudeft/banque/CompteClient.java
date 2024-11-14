@@ -28,6 +28,13 @@ public class CompteClient implements Serializable {
         return  comptes;
     }
 
+    // Méthode pour récupérer le numéro de compte client. elle nous sera utile afin de ne pas créé de numéro de compte similaire.
+
+
+    public String getNumero() {
+        return numero;
+    }
+
     /**
      * Ajoute un compte bancaire au compte-client.
      *

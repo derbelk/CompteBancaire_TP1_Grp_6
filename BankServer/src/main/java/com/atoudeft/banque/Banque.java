@@ -2,6 +2,7 @@ package com.atoudeft.banque;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.swing.text.html.HTMLDocument;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -128,10 +129,10 @@ public class Banque implements Serializable {
         else {
             for (int i = 0; i < numCompteClient.length(); i++) {
                 carac = numCompteClient.charAt(i);
-                if (Character.isUpperCase(carac))
+                if (Character.isUpperCase(carac))//carac>='A' && carac<='Z'
                     checkMaj = true;
 
-                else if (Character.isDigit(carac))
+                else if (Character.isDigit(carac))//carac>='0' && carac<='9'
                     checkChiffre = true;
 
             }
@@ -158,10 +159,17 @@ public class Banque implements Serializable {
                 }
         }
 
-        if (numCptOk && pinCptOk) {
-            CompteClient compteClient = new CompteClient(numCompteClient, nip);
-            comptes.add(compteClient);
-            compteCree = true;
+        Iterator<CompteClient> iterator = comptes.iterator();
+        ArrayList <CompteBancaire> compteBancaireClient = new ArrayList<CompteBancaire>();
+        while (iterator.hasNext()){
+            if (numCptOk && pinCptOk && numCompteClient != iterator.next().getNumero()) {
+                CompteClient compteClient = new CompteClient(numCompteClient, nip);
+                String numCompteBancaire = CompteBancaire.genereNouveauNumero();
+
+                CompteCheque cheque = new CompteCheque(numCompteBancaire, TypeCompte.CHEQUE);
+                comptes.add(compteClient);
+                compteCree = true;
+            }
         }
 
         return compteCree;
