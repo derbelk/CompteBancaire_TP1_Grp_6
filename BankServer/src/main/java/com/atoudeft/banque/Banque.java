@@ -163,7 +163,7 @@ public class Banque implements Serializable {
         ArrayList <CompteBancaire> compteBancaireClient = new ArrayList<CompteBancaire>();
         CompteCheque cheque = null;
         while (iterator.hasNext()){
-            if (numCptOk && pinCptOk && numCompteClient != iterator.next().getNumero()) {
+            if (numCptOk && pinCptOk && (numCompteClient != iterator.next().getNumero())) {
                 CompteClient compteClient = new CompteClient(numCompteClient, nip);
                 String numCompteBancaire = CompteBancaire.genereNouveauNumero();
                 compteBancaireClient = (ArrayList<CompteBancaire>) iterator.next().getComptesBancaire();
@@ -199,7 +199,7 @@ public class Banque implements Serializable {
             CompteBancaire compte;
             while (iterator.hasNext()){
                  compte = iterator.next();
-                 if(compte.getType().compareTo(TypeCompte.CHEQUE)==0){
+                 if(compte.getType() == TypeCompte.CHEQUE){
                      numeroCompteCheque = compte.getNumero();
                      return numeroCompteCheque;
                  } else return numeroCompteCheque;
