@@ -137,7 +137,7 @@ public class Banque implements Serializable {
         if (Sheckmin && SheckMaj && SheckChiffre && SheckTail) {
             NumCptOk = true;
         }
-        // Ici nous allons vérifier le pin fourni il est la
+        // Ici nous allons vérifier le pin fourni
 
         boolean Shecklettre = false;
         boolean Shecktailp = false;
