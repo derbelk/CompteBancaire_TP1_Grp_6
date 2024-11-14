@@ -163,7 +163,7 @@ public class Banque implements Serializable {
     }
 
     /**
-     * Retourne le numéro du compte-chèque d'un client à partir de son numéro de compte-client.
+     * Retourne le numéro du compte-chèque d'un client à partir de son numéro de compte-client.123
      *
      * @param numCompteClient numéro de compte-client
      * @return numéro du compte-chèque du client ayant le numéro de compte-client
