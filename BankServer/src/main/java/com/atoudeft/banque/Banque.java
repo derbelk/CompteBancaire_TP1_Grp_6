@@ -161,16 +161,25 @@ public class Banque implements Serializable {
 
         Iterator<CompteClient> iterator = comptes.iterator();
         ArrayList <CompteBancaire> compteBancaireClient = new ArrayList<CompteBancaire>();
+        CompteCheque cheque = null;
         while (iterator.hasNext()){
             if (numCptOk && pinCptOk && numCompteClient != iterator.next().getNumero()) {
                 CompteClient compteClient = new CompteClient(numCompteClient, nip);
                 String numCompteBancaire = CompteBancaire.genereNouveauNumero();
+                compteBancaireClient = (ArrayList<CompteBancaire>) iterator.next().getComptesBancaire();
+                Iterator<CompteBancaire> iterator2 = compteBancaireClient.iterator();
+                while (iterator2.hasNext()){
+                    if (iterator2.next().getNumero().compareTo(numCompteBancaire)!=0 ) {
+                        cheque = new CompteCheque(numCompteBancaire, TypeCompte.CHEQUE);
+                    }
+                    iterator.next().ajouter(cheque);
+                        comptes.add(compteClient);
+                        compteCree = true;
+                    }
 
-                CompteCheque cheque = new CompteCheque(numCompteBancaire, TypeCompte.CHEQUE);
-                comptes.add(compteClient);
-                compteCree = true;
+                }
+
             }
-        }
 
         return compteCree;
         //return this.comptes.add(new CompteClient(numCompteClient, nip));//À modifier
