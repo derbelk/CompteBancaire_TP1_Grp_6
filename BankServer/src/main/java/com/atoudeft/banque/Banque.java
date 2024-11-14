@@ -113,48 +113,55 @@ public class Banque implements Serializable {
 
         // Ici nous allons vérifier pour le numéro de compte fourni
 
-        boolean NumCptOk = false;
-        boolean PinCptOk = false;
-        boolean SheckChiffre = false;
-        boolean SheckMaj = false;
-        boolean Sheckmin = false;
-        boolean SheckTail = false;
+        boolean numCptOk = false;
+        boolean pinCptOk = false;
+        boolean checkChiffre = false;
+        boolean checkMaj = false;
+        boolean checkmin = false;
+        boolean checkTail = false;
         int taillech = numCompteClient.length();
         char carac;
         char carap;
-        for (int i = 0; i < numCompteClient.length(); i++) {
-            carac = numCompteClient.charAt(i);
-            if (Character.isUpperCase(carac))
-                SheckMaj = true;
-            else if (!Character.isLowerCase(carac)) {
-                Sheckmin = true;
-            } else if (Character.isDigit(carac)) {
-                SheckChiffre = true;
-            } else if (taillech >= 6 && taillech <= 8) {
-                SheckTail = true;
+
+        if (taillech < 6 || taillech > 8){
+            return false;
+        }
+        else {
+            for (int i = 0; i < numCompteClient.length(); i++) {
+                carac = numCompteClient.charAt(i);
+                if (Character.isUpperCase(carac))
+                    checkMaj = true;
+
+                else if (Character.isDigit(carac))
+                    checkChiffre = true;
+
             }
         }
-        if (Sheckmin && SheckMaj && SheckChiffre && SheckTail) {
-            NumCptOk = true;
+        if (checkMaj && checkChiffre) {
+            numCptOk = true;
         }
         // Ici nous allons vérifier le pin fourni
 
-        boolean Shecklettre = false;
-        boolean Shecktailp = false;
+        boolean checklettre = false;
+        boolean checktailp = false;
         int tailp = nip.length();
 
-        for (int j = 0; j < nip.length(); j++) {
-            carap = nip.charAt(j);
-            if (!Character.isLetter(carap))
-                Shecklettre = true;
-            else if (tailp <= 5 && tailp >= 4) {
-                Shecktailp = true;
-            }
+        if (tailp < 4 || tailp > 5){
+            return false;
         }
-        if (Shecklettre && Shecktailp)
-            PinCptOk = true;
+        else {
+                for (int j = 0; j < nip.length(); j++) {
+                    carap = nip.charAt(j);
+                    if(!Character.isLetter(carap)) {
+                        pinCptOk = true;
+                    }
+                    else {
+                        pinCptOk = false;
+                    }
+                }
+        }
 
-        if (NumCptOk && PinCptOk)
+        if (numCptOk && pinCptOk)
 
             return true;
 
