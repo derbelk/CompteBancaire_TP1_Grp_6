@@ -1,5 +1,6 @@
 package com.atoudeft.banque;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.text.html.HTMLDocument;
@@ -100,21 +101,91 @@ public class Banque implements Serializable {
     public boolean ajouter(String numCompteClient, String nip) {
         /*À compléter et modifier :
             - Vérifier que le numéro a entre 6 et 8 caractères et ne contient que des lettres majuscules et des chiffres.
-              Sinon, retourner false.
+              Sinon, retourner false. OK
             - Vérifier que le nip a entre 4 et 5 caractères et ne contient que des chiffres. Sinon,
-              retourner false.
-            - Vérifier s'il y a déjà un compte-client avec le numéro, retourner false.
+              retourner false. OK
+            - Vérifier s'il y a déjà un compte-client avec le numéro, retourner false. OK
             - Sinon :
-                . Créer un compte-client avec le numéro et le nip;
+                . Créer un compte-client avec le numéro et le nip; OK
                 . Générer (avec CompteBancaire.genereNouveauNumero()) un nouveau numéro de compte bancaire qui n'est
-                  pas déjà utilisé;
-                . Créer un compte-chèque aver ce numéro et l'ajouter au compte-client;
-                . Ajouter le compte-client à la liste des comptes et retourner true.
+                  pas déjà utilisé; OK
+                . Créer un compte-chèque aver ce numéro et l'ajouter au compte-client; OK
+                . Ajouter le compte-client à la liste des comptes et retourner true. OK
          */
 
-        // Ici nous allons vérifier pour le numéro de compte fourni
 
-        boolean numCptOk = false;
+        int taille = numCompteClient.length();
+        int tailleNip = nip.length();
+        char lettre;
+        char carac;
+        int nbMaj = 0, nbChiffre = 0;
+        CompteClient compteClient;
+        CompteCheque compteCheque;
+        String numcOmpteBancaire;
+
+        // ------------------------------------- Vérrification du numéro client ----------------------------------------------------------
+
+        if (taille < 6 || taille > 8) {
+            return false;
+        } else {
+            for (int i = 0; i < taille; i++) {
+                lettre = numCompteClient.charAt(i);
+                if (Character.isUpperCase(lettre)){
+                    nbMaj++;
+                }
+                if (Character.isDigit(lettre)){
+                    nbChiffre++;
+                }
+            }
+            if (nbMaj == 0 || nbChiffre == 0){
+                return false;
+            }
+        }
+        // ---------------------------------------------------------------------------------------------------------------------------------
+
+        //------------------------------------- Vérification du nip ------------------------------------------------------------------------
+
+        if (tailleNip < 4 && tailleNip > 5)
+            return false;
+        else {
+            for (int j = 0; j < tailleNip; j++) {
+                carac = nip.charAt(j);
+                if (!Character.isDigit(carac)) {
+                    return false;
+                }
+            }
+        }
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        //------------------------------------- Vérifions s'il y aun compte client existant déjà avec ce numéro ----------------------------
+
+        Iterator<CompteClient> iterator = comptes.iterator();
+
+        while (iterator.hasNext()) {
+
+            if (numCompteClient.equals(iterator.next().getNumero()))
+                return false;
+            else {
+                compteClient = new CompteClient(numCompteClient, nip);
+                numcOmpteBancaire = CompteBancaire.genereNouveauNumero();
+                ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) iterator.next().getComptesBancaire();
+                Iterator<CompteBancaire>iterator1 = compteBancaires.iterator();
+                while (iterator1.hasNext()){
+                    while (numcOmpteBancaire.equals(iterator1.next().getNumero())){
+                        numcOmpteBancaire = CompteBancaire.genereNouveauNumero();
+                    }
+                }
+                compteCheque = new CompteCheque(numcOmpteBancaire, TypeCompte.CHEQUE);
+                this.comptes.add(compteClient);
+                return true;
+            }
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        return true;
+    }
+        /*boolean numCptOk = false;
         boolean pinCptOk = false;
         boolean checkChiffre = false;
         boolean checkMaj = false;
@@ -184,6 +255,7 @@ public class Banque implements Serializable {
         return compteCree;
         //return this.comptes.add(new CompteClient(numCompteClient, nip));//À modifier
     }
+         */
 
     /**
      * Retourne le numéro du compte-chèque d'un client à partir de son numéro de compte-client.123
@@ -191,9 +263,9 @@ public class Banque implements Serializable {
      * @param numCompteClient numéro de compte-client
      * @return numéro du compte-chèque du client ayant le numéro de compte-client
      */
-    public String getNumeroCompteParDefaut(String numCompteClient) {
+   public String getNumeroCompteParDefaut(String numCompteClient) {
         CompteClient compteClient = getCompteClient(numCompteClient);
-        String numeroCompteCheque="PAS DE NUMÉRO DE COMPTE CHÈQUE !";
+        String numeroCompteCheque = "PAS DE NUMÉRO DE COMPTE CHÈQUE";
         if(compteClient != null){
             Iterator<CompteBancaire> iterator = compteClient.getComptesBancaire().iterator();
             CompteBancaire compte;
