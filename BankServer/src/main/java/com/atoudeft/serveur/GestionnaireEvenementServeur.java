@@ -1,10 +1,8 @@
 package com.atoudeft.serveur;
 
 import com.atoudeft.banque.Banque;
-import com.atoudeft.banque.CompteBancaire;
+import com.atoudeft.banque.CompteCheque;
 import com.atoudeft.banque.CompteClient;
-import com.atoudeft.banque.TypeCompte;
-import com.atoudeft.banque.serveur.CompteEpargne;
 import com.atoudeft.banque.serveur.ConnexionBanque;
 import com.atoudeft.banque.serveur.ServeurBanque;
 import com.atoudeft.commun.evenement.Evenement;
@@ -13,8 +11,7 @@ import com.atoudeft.commun.net.Connexion;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+
 /**
  * Cette classe représente un gestionnaire d'événement d'un serveur. Lorsqu'un serveur reçoit un texte d'un client,
  * il crée un événement à partir du texte reçu et alerte ce gestionnaire qui réagit en gérant l'événement.
@@ -147,25 +144,53 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                 case "EPARGNE":
                   // if()
                     break;
-
+// SELECT permettera de choisir entre le compte epargne ou cheque
                 case "SELECT" :
-//voici
                     argument = evenement.getArgument();
-                    if (cnx.getNumeroCompteActuel()==null) {
+                    if (cnx.getNumeroCompteClient()==null) {
                         cnx.envoyer("aucun compte connecte");
+                        cnx.envoyer("SELECT NO");
                         cnx.envoyer(cnx.getNumeroCompteActuel());
                         break;
                     }
 
                     if (argument.contentEquals("cheque")) {
                         cnx.envoyer("Compte cheque selectionnee");
+                        String numcptactuel= cnx.getNumeroCompteClient();
+                        String numcptcheque = serveurBanque.getBanque().getNumeroCompteParDefaut(numcptactuel);
+                        cnx.envoyer(numcptcheque);
+                        cnx.envoyer("SELECT OK");
+
                     } else if (argument.contentEquals("epargne")) {
                         cnx.envoyer("Compte epargne selectionnee");
+                        String numcptactuel= cnx.getNumeroCompteClient();
+                        String numcptepargne = serveurBanque.getBanque().getNumeroCompteParDefaut(numcptactuel);
+                        cnx.envoyer(numcptepargne);
+                        cnx.envoyer("SELECT OK");
+
                     }
                     else {
-                        cnx.envoyer("NO TYPE COMPTE CHOISIS");
+                        cnx.envoyer("SELECT NO");
                     }
+
+
+                case "DEPOT" :
+                    argument = evenement.getArgument();
                     break;
+
+                case "RETRAIT" :
+                    argument = evenement.getArgument();
+                    break;
+
+                case "FACTURE" :
+                    argument = evenement.getArgument();
+                    break;
+
+                case "TRANSFER" :
+                    argument = evenement.getArgument();
+                    break;
+
+
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default: //Renvoyer le texte recu convertit en majuscules :
                     msg = (evenement.getType() + " " + evenement.getArgument()).toUpperCase();
