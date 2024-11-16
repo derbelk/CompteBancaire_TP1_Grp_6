@@ -4,7 +4,7 @@ import com.atoudeft.banque.CompteBancaire;
 import com.atoudeft.banque.TypeCompte;
 
 public class CompteEpargne extends CompteBancaire {
-    private int limiteSolde = 1000;
+    private static int limiteSolde = 1000;
     private int fraisOperation = 2;
     private double tauxInteret;
 
@@ -22,9 +22,10 @@ public class CompteEpargne extends CompteBancaire {
     }
 
     public boolean debiter(double montant) {
-        if((montant> 0) && (solde>= montant)){
+        if((montant> 0) && (solde>= montant)) {
             solde -= montant;
-            if(solde < limiteSolde){
+        }else{
+        if(solde < limiteSolde){
                 solde -= fraisOperation;
             }
             return true;
@@ -43,3 +44,4 @@ public class CompteEpargne extends CompteBancaire {
         solde += solde*tauxInteret;
     }
 }
+//

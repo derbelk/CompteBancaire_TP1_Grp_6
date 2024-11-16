@@ -124,7 +124,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         }
                     }
                     // QUESTRION 3 ?
-                    //VERIFIER QUE LE COMPTE CLIENT EXISTE DANS LES COMPTES BANCAIRES PAS QUE LE NIP CORRESPONDS AU NIP DU COMPTE TROUVÉ
+                    //VERIFIER QUE LE COMPTE CLIENT EXISTE DANS LES COMPTES BANCAIRES PAS QUE LE NIP CORRESPONDS AU NIP DU COMPTE TROUVÉ.
                     ArrayList<CompteClient> compteClients = (ArrayList<CompteClient>)banque.getComptes();
                     Iterator<CompteClient> iterator1 = compteClients.iterator();
                     boolean existe = false ;
