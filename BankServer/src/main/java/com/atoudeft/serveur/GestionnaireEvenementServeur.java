@@ -101,13 +101,17 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         cnx.envoyer("CONNECT NO2");
                         break;
                     }
+
                     numCompteClient = t[0];
                     nip = t[1];
 
                     //VÉRIFIONS QUE LE COMPTE CLIENT EXISTE
                     banque = serveurBanque.getBanque();
+                    ArrayList<CompteClient>comptes = (ArrayList<CompteClient>) banque.getComptes();
+
                     CompteClient compteClient = banque.getCompteClient(numCompteClient);
-                    if(compteClient == null){
+
+                    if(!comptes.contains(compteClient)){
                         cnx.envoyer("LE COMPTE CLIENT N'EXISTE PAS !");
                         break;
                     }
