@@ -50,9 +50,3 @@ public abstract class CompteBancaire implements Serializable {
 
 
 }
-
-//public class CompteCheque extends CompteBancaire{
- //   public CompteCheque (String numero, TypeCompte type){
-
-//    }
-//}

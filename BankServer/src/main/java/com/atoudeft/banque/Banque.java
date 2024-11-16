@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class Banque implements Serializable {
     private String nom;
@@ -24,7 +25,7 @@ public class Banque implements Serializable {
      * @param numeroCompteClient le numéro du compte-client
      * @return le compte-client s'il a été trouvé. Sinon, retourne null
      */
-    public CompteClient getCompteClient(String numeroCompteClient) {
+    public  CompteClient getCompteClient(String numeroCompteClient) {
         CompteClient cpt = new CompteClient(numeroCompteClient, "");
         int index = this.comptes.indexOf(cpt);
         if (index != -1)
@@ -32,6 +33,11 @@ public class Banque implements Serializable {
         else
             return null;
     }
+    /*MÉTHODE POUR RETOURNER TOUS LES CLIENTS DE LA BANQUE */
+    public List<CompteClient> getComptes() {
+        return comptes;
+    }
+    //TU VÉRIFIE PAR LA BANQUE LA VALIDITÉ D'UN COMPTE ÉPARGNE!
 
     /**
      * Vérifier qu'un compte-bancaire appartient bien au compte-client.
@@ -168,25 +174,23 @@ public class Banque implements Serializable {
                 }
             }
         }
-
+        //JE CRÉE UN NOUVEAU COMPTE CLIENT APRÈS AVOIR FAIT LA VÉRIFICATION
         compteClient = new CompteClient(numCompteClient,nip);
         String numCompteBancaire = CompteBancaire.genereNouveauNumero();
         ArrayList<CompteBancaire> compteBancaires = new ArrayList<>();
 
-
+        //JE PARCOURS LES COMPTES BANCAIRES DU CLIENT ET JE CRÉE UN NOUVEAU NUMÉRO TANT QU'IL N'EST PAS DIFFÉRENT DES NUMÉROS DE COMPTES D'AUTRES CLIENTS
         for(CompteBancaire compte: compteBancaires){
             while(numCompteBancaire.equals(compte.getNumero())){
                 numCompteBancaire = CompteBancaire.genereNouveauNumero();
             }
         }
-
-
+        //JE CRÉE LE NOUVEAU COMPTE CHÈQUE
         compteCheque = new CompteCheque(numCompteBancaire,TypeCompte.CHEQUE);
         this.comptes.add(compteClient);
         return true;
     }
-
-
+    /*MÉTHODE POUR VÉRIFIER LE NIP, utiliser pour verifier le NIP de l'objet de la banque utilisé*/
     /**
      * Retourne le numéro du compte-chèque d'un client à partir de son numéro de compte-client.123
      *
