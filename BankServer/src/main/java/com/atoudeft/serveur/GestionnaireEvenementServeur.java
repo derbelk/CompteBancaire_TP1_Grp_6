@@ -90,16 +90,19 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     break;
 
                 case "CONNECT":
-                    String num, niP;
 
-                    cnx.envoyer("Numéro de compte-client:");
+                    argument = evenement.getArgument();
+                    t = argument.split(":");
+                    numCompteClient = t[0];
+                    nip = t[1];
 
-                    cnx.envoyer("Veuillez entrer votre NIP:");
-                 //   niP = clavier.next();
                     Iterator <Connexion> iterator = serveur.connectes.iterator();
 
                     while (iterator.hasNext()){
-                        cnx = (ConnexionBanque) iterator.next();
+                        ConnexionBanque cnx1 = (ConnexionBanque) iterator.next();
+                        if (numCompteClient.equals(cnx1.getNumeroCompteClient())){
+                            cnx.envoyer("CONNECT NO");
+                        }
                     }
 
 
