@@ -118,17 +118,22 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     break;
 
                 case "SELECT" :
-                    Scanner clavier1 = new Scanner(System.in);
-                    String[]  choixcpt;
-                    //cnx.envoyer("SELECT cheque");
-                    //cnx.envoyer("SELECT epargne");
-                    if (cnx.getNumeroCompteClient()==null) {
+
+                    argument = evenement.getArgument();
+                    if (cnx.getNumeroCompteActuel()==null) {
                         cnx.envoyer("aucun compte connecte");
+                        cnx.envoyer(cnx.getNumeroCompteActuel());
                         break;
                     }
-                    argument = evenement.getArgument();
-                    choixcpt = argument.split(":");
 
+                    if (argument.contentEquals("cheque")) {
+                        cnx.envoyer("Compte cheque selectionnee");
+                    } else if (argument.contentEquals("epargne")) {
+                        cnx.envoyer("Compte epargne selectionnee");
+                    }
+                    else {
+                        cnx.envoyer("NO TYPE COMPTE CHOISIS");
+                    }
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default: //Renvoyer le texte recu convertit en majuscules :
