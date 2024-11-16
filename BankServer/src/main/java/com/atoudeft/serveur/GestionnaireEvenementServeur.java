@@ -10,6 +10,7 @@ import com.atoudeft.banque.serveur.ServeurBanque;
 import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.Arguments;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,15 +56,18 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
             typeEvenement = evenement.getType();
             cnx.setTempsDerniereOperation(System.currentTimeMillis());
             switch (typeEvenement) {
+
                 /******************* COMMANDES GÉNÉRALES *******************/
                 case "EXIT": //Ferme la connexion avec le client qui a envoyé "EXIT":
                     cnx.envoyer("END");
                     serveurBanque.enlever(cnx);
                     cnx.close();
                     break;
+
                 case "LIST": //Envoie la liste des numéros de comptes-clients connectés :
                     cnx.envoyer("LIST " + serveurBanque.list());
                     break;
+
                 /******************* COMMANDES DE GESTION DE COMPTES *******************/
                 case "NOUVEAU": //Crée un nouveau compte-client :
                     if (cnx.getNumeroCompteClient()!=null) {
@@ -88,10 +92,12 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                             cnx.envoyer("NOUVEAU NO "+t[0]+" existe");
                     }
                     break;
-
                 case "CONNECT":
-
                     argument = evenement.getArgument();
+                    if(argument == null || !argument.equals(":")){
+                        cnx.envoyer("CONNECT NO !");
+                        break;
+                    }
                     t = argument.split(":");
                     numCompteClient = t[0];
                     nip = t[1];
@@ -104,7 +110,6 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                             cnx.envoyer("CONNECT NO");
                         }
                     }
-
 
                     break;
                 case "EPARGNE":
@@ -125,15 +130,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     argument = evenement.getArgument();
                     choixcpt = argument.split(" ");
 
-
-
-
                     break;
-
-
-
-
-
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default: //Renvoyer le texte recu convertit en majuscules :
                     msg = (evenement.getType() + " " + evenement.getArgument()).toUpperCase();
