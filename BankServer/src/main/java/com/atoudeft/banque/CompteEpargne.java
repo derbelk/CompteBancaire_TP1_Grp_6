@@ -1,7 +1,4 @@
-package com.atoudeft.banque.serveur;
-
-import com.atoudeft.banque.CompteBancaire;
-import com.atoudeft.banque.TypeCompte;
+package com.atoudeft.banque;
 
 public class CompteEpargne extends CompteBancaire {
     private static int limiteSolde = 1000;
