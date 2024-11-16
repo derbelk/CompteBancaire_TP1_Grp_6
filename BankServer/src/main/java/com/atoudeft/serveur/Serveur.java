@@ -41,7 +41,6 @@ public class Serveur implements Lecteur {
     private boolean demarre;
     //Écouteur qui gère les événements correspondant à l'arrivée de texte de clients :
     protected GestionnaireEvenement gestionnaireEvenement;
-
     /**
      * Crée un serveur qui va écouter sur le port spécifié.
      *

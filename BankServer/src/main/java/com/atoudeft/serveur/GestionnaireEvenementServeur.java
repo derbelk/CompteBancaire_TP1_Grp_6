@@ -93,30 +93,59 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     break;
                 case "CONNECT":
                     argument = evenement.getArgument();
+
+                    /*JE VÉRIFIE SI LES ARGUMENTS CONTIENNENT LE REGEX DU SPLIT ET SI ILS NE SONT PAS NULLES*/
                     if(argument == null || !argument.contains(":")){
-                        cnx.envoyer("CONNECT NO");
+                        cnx.envoyer("CONNECT NO1");
                         break;
                     }
                     t = argument.split(":");
+                    if(t.length !=2){
+                        cnx.envoyer("CONNECT NO2");
+                        break;
+                    }
                     numCompteClient = t[0];
                     nip = t[1];
-                    if(t.length !=2){
-                        cnx.envoyer("CONNECT NO");
-                    }
-                    Iterator <Connexion> iterator = serveur.connectes.iterator();
 
+                    //VÉRIFIONS QUE LE COMPTE CLIENT EXISTE
+                    banque = serveurBanque.getBanque();
+                    CompteClient compteClient = banque.getCompteClient(numCompteClient);
+                    if(compteClient == null){
+                        cnx.envoyer("LE COMPTE CLIENT N'EXISTE PAS !");
+                        break;
+                    }
+                    //VÉRIFIONS QUE LE COMPTE N'EST PAS DÉJÀ CONNECTÉ.
+                    Iterator <Connexion> iterator = serveur.connectes.iterator();
                     while (iterator.hasNext()){
                         ConnexionBanque cnx1 = (ConnexionBanque) iterator.next();
                         if (numCompteClient.equals(cnx1.getNumeroCompteClient())){
                             cnx.envoyer("CONNECT NO");
+                            break;
                         }
                     }
-
-                    break;
-                case "EPARGNE":
-                    if(cnx.estInactifDepuis(3000)){
-                        cnx.envoyer("EPARGNE NO");
+                    // QUESTRION 3 ?
+                    //VERIFIER QUE LE COMPTE CLIENT EXISTE DANS LES COMPTES BANCAIRES PAS QUE LE NIP CORRESPONDS AU NIP DU COMPTE TROUVÉ
+                    ArrayList<CompteClient> compteClients = (ArrayList<CompteClient>)banque.getComptes();
+                    Iterator<CompteClient> iterator1 = compteClients.iterator();
+                    boolean existe = false ;
+                    while (iterator1.hasNext()){
+                        CompteClient compteClient1 = iterator1.next();
+                        if(compteClient1.getNumero().equals(numCompteClient)){
+                            existe = true;
+                            break;
+                        }
                     }
+                    if(!existe || !compteClient.getNip().equals(nip)){
+                        cnx.envoyer("CONNECT NO5");
+                    }else {
+                        cnx.setNumeroCompteClient(numCompteClient);
+                        cnx.setNumeroCompteActuel(numCompteClient);
+                        cnx.envoyer("CONNECT OK");
+                        break;
+                    }
+
+                case "EPARGNE":
+                  // if()
                     break;
 
                 case "SELECT" :

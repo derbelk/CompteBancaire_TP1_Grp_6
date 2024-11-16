@@ -20,6 +20,11 @@ public class CompteClient implements Serializable {
         this.nip = nip;
         comptes = new ArrayList<>();
     }
+
+    public String getNip() {
+        return nip;
+    }
+
     /**
      *Cette méthode est ajoutée pour accéder aux comptes bancaires du client (Compte chèque ou éventuellement Compte Epargne !)
 
