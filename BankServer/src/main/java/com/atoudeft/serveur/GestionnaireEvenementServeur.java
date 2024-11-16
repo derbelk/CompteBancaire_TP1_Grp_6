@@ -10,7 +10,6 @@ import com.atoudeft.banque.serveur.ServeurBanque;
 import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
-import jdk.nashorn.internal.runtime.regexp.joni.constants.Arguments;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -94,8 +93,8 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     break;
                 case "CONNECT":
                     argument = evenement.getArgument();
-                    if(argument == null || !argument.equals(":")){
-                        cnx.envoyer("CONNECT NO !");
+                    if(argument == null || !argument.contains(":")){
+                        cnx.envoyer("CONECT NO");
                         break;
                     }
                     t = argument.split(":");
@@ -128,7 +127,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         break;
                     }
                     argument = evenement.getArgument();
-                    choixcpt = argument.split(" ");
+                    choixcpt = argument.split(":");
 
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
