@@ -120,7 +120,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     break;
 
                 case "SELECT" :
-
+//voici
                     argument = evenement.getArgument();
                     if (cnx.getNumeroCompteActuel()==null) {
                         cnx.envoyer("aucun compte connecte");
