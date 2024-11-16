@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Banque implements Serializable {
     private String nom;
     private List<CompteClient> comptes;
+    private int index = 0;
 
     public Banque(String nom) {
         this.nom = nom;
@@ -26,13 +27,26 @@ public class Banque implements Serializable {
      * @return le compte-client s'il a été trouvé. Sinon, retourne null
      */
     public  CompteClient getCompteClient(String numeroCompteClient) {
-        CompteClient cpt = new CompteClient(numeroCompteClient, "");
+        boolean trouve = false;
+        Iterator<CompteClient>iterator = comptes.iterator();
+        while (iterator.hasNext()){
+            CompteClient compteClient = iterator.next();
+            if (numeroCompteClient.equals(compteClient.getNumero())){
+                return compteClient;
+            }
+        }
+        return null;
+        }
+       /* CompteClient cpt = new CompteClient(numeroCompteClient, "");
         int index = this.comptes.indexOf(cpt);
         if (index != -1)
             return this.comptes.get(index);
         else
             return null;
     }
+    */
+
+
     /*MÉTHODE POUR RETOURNER TOUS LES CLIENTS DE LA BANQUE */
     public List<CompteClient> getComptes() {
         return comptes;
@@ -200,7 +214,7 @@ public class Banque implements Serializable {
      * @return numéro du compte-chèque du client ayant le numéro de compte-client
      */
     public String getNumeroCompteParDefaut(String numCompteClient) {
-        CompteClient compteClient = getCompteClient(numCompteClient);
+        CompteClient compteClient= getCompteClient(numCompteClient);
 
         if(compteClient == null){
             return null;
