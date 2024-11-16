@@ -113,7 +113,6 @@ public class Banque implements Serializable {
                 . Ajouter le compte-client à la liste des comptes et retourner true. OK
          */
 
-
         int taille = numCompteClient.length();
         int tailleNip = nip.length();
         char lettre;
@@ -145,9 +144,9 @@ public class Banque implements Serializable {
 
         //------------------------------------- Vérification du nip ------------------------------------------------------------------------
 
-        if (tailleNip < 4 && tailleNip > 5)
+        if (tailleNip < 4 || tailleNip > 5) {
             return false;
-        else {
+        } else {
             for (int j = 0; j < tailleNip; j++) {
                 carac = nip.charAt(j);
                 if (!Character.isDigit(carac)) {
@@ -163,8 +162,10 @@ public class Banque implements Serializable {
 
         while (iterator.hasNext()) {
 
-            if (numCompteClient.equals(iterator.next().getNumero()))
+            iterator.next();
+            if (numCompteClient.equals(iterator.next().getNumero())) {
                 return false;
+            }
             else {
                 compteClient = new CompteClient(numCompteClient, nip);
                 numcOmpteBancaire = CompteBancaire.genereNouveauNumero();
