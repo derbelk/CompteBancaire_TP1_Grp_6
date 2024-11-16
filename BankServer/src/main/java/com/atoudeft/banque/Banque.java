@@ -187,6 +187,8 @@ public class Banque implements Serializable {
         }
         //JE CRÉE LE NOUVEAU COMPTE CHÈQUE
         compteCheque = new CompteCheque(numCompteBancaire,TypeCompte.CHEQUE);
+
+        compteClient.ajouter(compteCheque);
         this.comptes.add(compteClient);
         return true;
     }
