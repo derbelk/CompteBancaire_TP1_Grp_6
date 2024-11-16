@@ -94,13 +94,15 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                 case "CONNECT":
                     argument = evenement.getArgument();
                     if(argument == null || !argument.contains(":")){
-                        cnx.envoyer("CONECT NO");
+                        cnx.envoyer("CONNECT NO");
                         break;
                     }
                     t = argument.split(":");
                     numCompteClient = t[0];
                     nip = t[1];
-
+                    if(t.length !=2){
+                        cnx.envoyer("CONNECT NO");
+                    }
                     Iterator <Connexion> iterator = serveur.connectes.iterator();
 
                     while (iterator.hasNext()){
