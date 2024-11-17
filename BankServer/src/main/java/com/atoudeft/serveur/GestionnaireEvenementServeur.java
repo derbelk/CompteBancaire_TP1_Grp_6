@@ -215,10 +215,10 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     char carac;
                     argument = evenement.getArgument();
 
-                    /*if (argument.isEmpty()) {
+                    if (argument.isEmpty()) {
                         cnx.envoyer("NO");
                         break;
-                    }*/
+                    }
 
                     if(cnx.getNumeroCompteClient()== null){
                         cnx.envoyer("NO");
@@ -233,10 +233,12 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     }
                     double argument1 = Double.parseDouble(argument);
                     banque1 = serveurBanque.getBanque();
+
                     if (banque1.deposer(argument1, cnx.getNumeroCompteActuel())){
                         cnx.envoyer("OK");
                         break;
                     }
+
 
 
                     break;
