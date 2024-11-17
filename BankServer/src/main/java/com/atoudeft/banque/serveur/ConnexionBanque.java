@@ -1,6 +1,8 @@
 package com.atoudeft.banque.serveur;
 
 import com.atoudeft.banque.CompteBancaire;
+import com.atoudeft.banque.CompteEpargne;
+import com.atoudeft.banque.TypeCompte;
 import com.atoudeft.commun.net.Connexion;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -65,7 +67,6 @@ public class ConnexionBanque extends Connexion {
     public String getNumeroCompteClient() {
         return numeroCompteClient;
     }
-
     /**
      * Modifie le numéro du compte-client du client utilisant cette connexion.
      *

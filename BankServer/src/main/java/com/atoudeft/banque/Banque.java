@@ -26,6 +26,7 @@ public class Banque implements Serializable {
      * @param numeroCompteClient le numéro du compte-client
      * @return le compte-client s'il a été trouvé. Sinon, retourne null
      */
+    //CETTE MÉTHODE A ÉTÉ REDÉFINIE POUR VÉRIFIER L'EXISTENCE D'UN COMPTE BANCAIRE
     public  CompteClient getCompteClient(String numeroCompteClient) {
         boolean trouve = false;
         Iterator<CompteClient>iterator = comptes.iterator();
@@ -201,7 +202,6 @@ public class Banque implements Serializable {
         }
         //JE CRÉE LE NOUVEAU COMPTE CHÈQUE
         compteCheque = new CompteCheque(numCompteBancaire,TypeCompte.CHEQUE);
-
         compteClient.ajouter(compteCheque);
         this.comptes.add(compteClient);
         return true;
@@ -233,7 +233,6 @@ public class Banque implements Serializable {
         /**
          *CETTE MÉTHODE EST UTILISÉE POUR VÉRIFIER SI LE CLIENT POSSÈDE UN COMPTE ÉPARGNE !
          */
-
 
     public String getNumeroCompteEpargne (String numCompteClient){
         CompteClient compteClient = getCompteClient(numCompteClient);

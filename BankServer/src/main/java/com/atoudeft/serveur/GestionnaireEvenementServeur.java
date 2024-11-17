@@ -94,12 +94,12 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                     /*JE VÉRIFIE SI LES ARGUMENTS CONTIENNENT LE REGEX DU SPLIT ET SI ILS NE SONT PAS NULLES*/
                     if(argument == null || !argument.contains(":")){
-                        cnx.envoyer("CONNECT NO1");
+                        cnx.envoyer("CONNECT NO");
                         break;
                     }
                     t = argument.split(":");
                     if(t.length !=2){
-                        cnx.envoyer("CONNECT NO2");
+                        cnx.envoyer("CONNECT NO");
                         break;
                     }
 
@@ -151,7 +151,25 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
 
                 case "EPARGNE":
-                  // if()
+                    argument = evenement.getArgument();
+                    if(argument == null || argument.contains(":")){
+                        cnx.envoyer("CONNECT NO");
+                        break;
+                    }
+                    if(argument.compareTo("EPARGNE")!=0){
+                        cnx.envoyer("CONNECT NO");
+                        break;
+                    }
+                    if(cnx.getNumeroCompteClient() == null){
+                        cnx.envoyer("EPARGNE NO");
+                        break;
+                    }
+                    Banque banque1 = serveurBanque.getBanque();
+                    if(banque1.getNumeroCompteEpargne(cnx.getNumeroCompteClient())==null){
+                        cnx.envoyer("EPARGNE NO");
+                        break;
+                    }
+
                     break;
 // SELECT permettera de choisir entre le compte epargne ou cheque
                 case "SELECT" :
