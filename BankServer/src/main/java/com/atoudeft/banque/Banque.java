@@ -72,16 +72,34 @@ public class Banque implements Serializable {
     public boolean deposer(double montant, String numeroCompte) {
         //throw new NotImplementedException();
 
+        CompteCheque compteCheque;
+        CompteEpargne compteEpargne;
         boolean depot = false;
         CompteClient compteClient = getCompteClient(numeroCompte);
-        ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
-        Iterator<CompteBancaire>iterator = compteBancaires.iterator();
-        while (iterator.hasNext()){
-            CompteBancaire compteBancaire = iterator.next();
-            compteBancaire.solde += montant;
-            depot = true;
+        if (compteClient != null){
+            ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
+            Iterator<CompteBancaire>iterator = compteBancaires.iterator();
+            while (iterator.hasNext()) {
+                CompteBancaire compteBancaire = iterator.next();
+                if (compteBancaire.getType().equals(TypeCompte.CHEQUE)) {
+                    compteCheque = (CompteCheque) compteBancaire;
+                    compteCheque.crediter(montant);
+                    depot = true;
+                }
+                if (compteBancaire.getType().equals(TypeCompte.EPARGNE)){
+                    assert compteBancaire instanceof CompteEpargne;
+                    compteEpargne = (CompteEpargne) compteBancaire;
+                    compteEpargne.crediter(montant);
+                    depot = true;
+                }
+            }
 
+            return depot;
         }
+
+
+
+
 
         return depot;
     }
