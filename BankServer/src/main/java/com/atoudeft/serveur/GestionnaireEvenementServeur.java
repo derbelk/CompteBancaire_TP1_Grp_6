@@ -250,7 +250,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     break;
 
                 case "FACTURE" :
-                    // a revisiter
+                    // a revisiter 1
 
                     argument = evenement.getArgument();
                     t = argument.split("//s+-");

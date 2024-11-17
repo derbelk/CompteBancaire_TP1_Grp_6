@@ -94,7 +94,7 @@ public class Banque implements Serializable {
      * @return true si le retrait s'est effectué correctement
      */
     public boolean retirer(double montant, String numeroCompte) {
-        //throw new NotImplementedException();
+        //throw new NotImplementedException(); rebv
 
         boolean retrait = false;
         CompteClient compteClient = getCompteClient(numeroCompte);
