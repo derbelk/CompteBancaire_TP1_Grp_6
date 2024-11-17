@@ -38,7 +38,6 @@ public class ConnexionBanque extends Connexion {
         }
         return false;
         //À définir :
-        //throw new NotImplementedException();//ligne à supprimer
     }
 
     /**

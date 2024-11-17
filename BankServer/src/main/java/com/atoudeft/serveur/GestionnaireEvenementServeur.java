@@ -1,8 +1,6 @@
 package com.atoudeft.serveur;
 
-import com.atoudeft.banque.Banque;
-import com.atoudeft.banque.CompteCheque;
-import com.atoudeft.banque.CompteClient;
+import com.atoudeft.banque.*;
 import com.atoudeft.banque.serveur.ConnexionBanque;
 import com.atoudeft.banque.serveur.ServeurBanque;
 import com.atoudeft.commun.evenement.Evenement;
@@ -151,25 +149,26 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
 
                 case "EPARGNE":
-                    argument = evenement.getArgument();
-                    if(argument == null || argument.contains(":")){
-                        cnx.envoyer("CONNECT NO");
-                        break;
-                    }
-                    if(argument.compareTo("EPARGNE")!=0){
-                        cnx.envoyer("CONNECT NO");
-                        break;
-                    }
                     if(cnx.getNumeroCompteClient() == null){
                         cnx.envoyer("EPARGNE NO");
                         break;
                     }
                     Banque banque1 = serveurBanque.getBanque();
-                    if(banque1.getNumeroCompteEpargne(cnx.getNumeroCompteClient())==null){
+                    if(banque1.getNumeroCompteEpargne(cnx.getNumeroCompteClient())!=null){
                         cnx.envoyer("EPARGNE NO");
                         break;
                     }
+                    CompteClient compteClients;
+                    Iterator<CompteClient> iterator1 = banque1.getComptes().iterator();
+                    ArrayList<CompteBancaire> compteBancairese;
+                    while (iterator1.hasNext()){
+                        compteClients = iterator1.next();
+                        CompteBancaire compteBancaires;
 
+                    }
+                    String numeroCompteB = CompteBancaire.genereNouveauNumero();
+                    banque1.getCompteClient(cnx.getNumeroCompteClient()).ajouter(new CompteEpargne(numeroCompteB,TypeCompte.EPARGNE,0.05));
+                    cnx.envoyer("EPARGNE OK");
                     break;
 // SELECT permettera de choisir entre le compte epargne ou cheque
                 case "SELECT" :
