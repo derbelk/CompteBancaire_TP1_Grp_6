@@ -170,7 +170,32 @@ public class Banque implements Serializable {
      * @return true si le paiement s'est bien effectuée
      */
     public boolean payerFacture(double montant, String numeroCompte, String numeroFacture, String description) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        CompteCheque compteCheque;
+        CompteEpargne compteEpargne;
+        boolean payer = false;
+        CompteClient compteClient = getCompteClient(numeroCompte);
+        if (compteClient != null){
+            ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
+            Iterator<CompteBancaire>iterator = compteBancaires.iterator();
+            while (iterator.hasNext()) {
+                CompteBancaire compteBancaire = iterator.next();
+                if (compteBancaire.getType().equals(TypeCompte.CHEQUE)) {
+                    compteCheque = (CompteCheque) compteBancaire;
+                    if (compteCheque.payerFacture(numeroFacture, montant, description))
+                        payer = true;
+                }
+                if (compteBancaire.getType().equals(TypeCompte.EPARGNE)){
+                    assert compteBancaire instanceof CompteEpargne;
+                    compteEpargne = (CompteEpargne) compteBancaire;
+                    if (compteEpargne.payerFacture(numeroFacture, montant, description))
+                        payer = true;
+                }
+            }
+
+            return payer;
+        }
+        return payer;
     }
 
     /**

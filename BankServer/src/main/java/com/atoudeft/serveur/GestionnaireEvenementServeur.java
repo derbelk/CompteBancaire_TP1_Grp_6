@@ -286,21 +286,48 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                 case "FACTURE" :
                     // a revisiter 1
 
+                    if(cnx.getNumeroCompteClient()== null){
+                        cnx.envoyer("NO");
+                        break;
+                    }
+
+                    String[] arguments = new String[3];
                     argument = evenement.getArgument();
-                    t = argument.split("//s+-");
-                    double montant = Double.parseDouble(t[0]);
-                    String numfacture = t[1];
-                    String descfacture = t[2];
+                    char carac2;
+                    boolean estChiffre;
 
-                    //cnx.envoyer(montant);
-                    cnx.envoyer(numfacture);
-                    cnx.envoyer(descfacture);
+                    if (argument.isEmpty()){
+                        cnx.envoyer("NO");
+                        break;
+                    }
 
-                    double argument3;
+                    arguments = argument.split(" ");
+
+                    String montantFacture = arguments[0];
+                    String numeroFacture = arguments[1];
+                    String description = arguments[2];
+
+
+
+                    for (int i = 0; i < montantFacture.length(); i++) {
+                        carac2 = montantFacture.charAt(i);
+                        if (!Character.isDigit(carac2)) {
+                            cnx.envoyer("NO");
+                            break;
+                        }
+                    }
+                    double montantF = Double.parseDouble(montantFacture);
 
                     banque1 = serveurBanque.getBanque();
-                    banque1.payerFacture(montant, cnx.getNumeroCompteActuel(), numfacture,descfacture);
-                    cnx.envoyer("OK");
+
+                    if (banque1.payerFacture(montantF, cnx.getNumeroCompteClient(), numeroFacture, description)){
+                        cnx.envoyer("OK");
+                    }
+                    else{
+                        cnx.envoyer("NO");
+                        break;
+                    }
+
                     break;
 
 
