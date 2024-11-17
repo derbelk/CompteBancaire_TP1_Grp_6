@@ -123,27 +123,31 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                             cnx.envoyer("CONNECT NO");
                             break;
                         }
-                    }
+                        else{
+                            ArrayList<CompteClient> compteClients = (ArrayList<CompteClient>)banque.getComptes();
+                            Iterator<CompteClient> iterator1 = compteClients.iterator();
+                            boolean existe = false ;
+                            while (iterator1.hasNext()){
+                                CompteClient compteClient1 = iterator1.next();
+                                if(compteClient1.getNumero().equals(numCompteClient)){
+                                    existe = true;
+                                    break;
+                                }
+                            }
+                            if(!existe || !compteClient.getNip().equals(nip)){
+                                cnx.envoyer("CONNECT NO5");
+                            }else {
+                                cnx.setNumeroCompteClient(numCompteClient);
+                                cnx.setNumeroCompteActuel(numCompteClient);
+                                cnx.envoyer("CONNECT OK");
+                            }
+                        }
                     // QUESTRION 3 ?
                     //VERIFIER QUE LE COMPTE CLIENT EXISTE DANS LES COMPTES BANCAIRES PAS QUE LE NIP CORRESPONDS AU NIP DU COMPTE TROUVÉ.
-                    ArrayList<CompteClient> compteClients = (ArrayList<CompteClient>)banque.getComptes();
-                    Iterator<CompteClient> iterator1 = compteClients.iterator();
-                    boolean existe = false ;
-                    while (iterator1.hasNext()){
-                        CompteClient compteClient1 = iterator1.next();
-                        if(compteClient1.getNumero().equals(numCompteClient)){
-                            existe = true;
-                            break;
-                        }
-                    }
-                    if(!existe || !compteClient.getNip().equals(nip)){
-                        cnx.envoyer("CONNECT NO5");
-                    }else {
-                        cnx.setNumeroCompteClient(numCompteClient);
-                        cnx.setNumeroCompteActuel(numCompteClient);
-                        cnx.envoyer("CONNECT OK");
+
                         break;
                     }
+
 
                 case "EPARGNE":
                   // if()
