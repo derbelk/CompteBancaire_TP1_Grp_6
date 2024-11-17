@@ -158,18 +158,28 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         cnx.envoyer("EPARGNE NO");
                         break;
                     }
+
+                    String numeroCompteB = CompteBancaire.genereNouveauNumero();
                     CompteClient compteClients;
                     Iterator<CompteClient> iterator1 = banque1.getComptes().iterator();
-                    ArrayList<CompteBancaire> compteBancairese;
+                    ArrayList<CompteBancaire> compteBancaires;
                     while (iterator1.hasNext()){
                         compteClients = iterator1.next();
-                        CompteBancaire compteBancaires;
+                        compteBancaires = (ArrayList<CompteBancaire>) compteClients.getComptesBancaire();
+                        Iterator<CompteBancaire>iterator2 = compteBancaires.iterator();
+                        while (iterator2.hasNext()){
+                            CompteBancaire  compteBancaire = iterator2.next();
+                            while (numeroCompteB.equals(compteBancaire.getNumero())){
+                                numeroCompteB = CompteBancaire.genereNouveauNumero();
+                            }
+                        }
 
                     }
-                    String numeroCompteB = CompteBancaire.genereNouveauNumero();
                     banque1.getCompteClient(cnx.getNumeroCompteClient()).ajouter(new CompteEpargne(numeroCompteB,TypeCompte.EPARGNE,0.05));
                     cnx.envoyer("EPARGNE OK");
+
                     break;
+
 // SELECT permettera de choisir entre le compte epargne ou cheque
                 case "SELECT" :
                     argument = evenement.getArgument();
