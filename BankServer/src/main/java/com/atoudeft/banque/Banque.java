@@ -73,7 +73,19 @@ public class Banque implements Serializable {
      * @return true si le dépot s'est effectué correctement
      */
     public boolean deposer(double montant, String numeroCompte) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        boolean depot = false;
+        CompteClient compteClient = getCompteClient(numeroCompte);
+        ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
+        Iterator<CompteBancaire>iterator = compteBancaires.iterator();
+        while (iterator.hasNext()){
+            CompteBancaire compteBancaire = iterator.next();
+            compteBancaire.solde += montant;
+            depot = true;
+
+        }
+
+        return depot;
     }
 
     /**
