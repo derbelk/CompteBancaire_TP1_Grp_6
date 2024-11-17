@@ -9,6 +9,7 @@ import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -164,6 +165,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                     if (argument.contentEquals("cheque")) {
                         cnx.envoyer("Compte cheque selectionnee");
+                        String typecompte="cheque";
                         String numcptactuel= cnx.getNumeroCompteClient();
                         String numcptcheque = serveurBanque.getBanque().getNumeroCompteParDefaut(numcptactuel);
                         cnx.envoyer(numcptcheque);
@@ -171,6 +173,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                     } else if (argument.contentEquals("epargne")) {
                         cnx.envoyer("Compte epargne selectionnee");
+                        String typecompte="epargne";
                         String numcptactuel= cnx.getNumeroCompteClient();
                         String numcptepargne = serveurBanque.getBanque().getNumeroCompteParDefaut(numcptactuel);
                         cnx.envoyer(numcptepargne);
@@ -181,21 +184,48 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         cnx.envoyer("SELECT NO");
                     }
 
+                    break;
+
 
                 case "DEPOT" :
                     argument = evenement.getArgument();
+                    String compteutilise="test";
+                    if (compteutilise.contentEquals("cheque")){
+                        
+                    }
+                    if (compteutilise.contentEquals("epargne")) {
+                        
+                    }
                     break;
 
                 case "RETRAIT" :
                     argument = evenement.getArgument();
+                    compteutilise=argument;
+                    if (compteutilise.contentEquals("cheque")){
+
+                    }
+                    if (compteutilise.contentEquals("epargne")) {
+
+                    }
                     break;
+
 
                 case "FACTURE" :
                     argument = evenement.getArgument();
+                    t = argument.split("//s+-");
+                    String montant = t[0];
+                    String numfacture = t[1];
+                    String descfacture = t[2];
+
+                    cnx.envoyer(montant);
+                    cnx.envoyer(numfacture);
+                    cnx.envoyer(descfacture);
+
                     break;
 
                 case "TRANSFER" :
                     argument = evenement.getArgument();
+
                     break;
 
 
