@@ -191,22 +191,31 @@ public class Banque implements Serializable {
         }
         //JE CRÉE UN NOUVEAU COMPTE CLIENT APRÈS AVOIR FAIT LA VÉRIFICATION
         compteClient = new CompteClient(numCompteClient,nip);
-        String numCompteBancaire = CompteBancaire.genereNouveauNumero();
-        ArrayList<CompteBancaire> compteBancaires = new ArrayList<>();
 
-        //JE PARCOURS LES COMPTES BANCAIRES DU CLIENT ET JE CRÉE UN NOUVEAU NUMÉRO TANT QU'IL N'EST PAS DIFFÉRENT DES NUMÉROS DE COMPTES D'AUTRES CLIENTS
-        for(CompteBancaire compte: compteBancaires){
-            while(numCompteBancaire.equals(compte.getNumero())){
-                numCompteBancaire = CompteBancaire.genereNouveauNumero();
+        //CRÉATION D'UN NOUVEAU NUMÉRO DE COMPTE BANCAIRE ET VÉRIFICATION DE S'IL EST UNIQUE OU PAS. DANS LE CAS OÙ IL NE L'EST PAS ON LE RECRÉÉ
+
+        String numCompteBancaire = CompteBancaire.genereNouveauNumero();
+        Iterator<CompteClient>iterator1 = comptes.iterator();
+        CompteClient compteClient1;
+        while (iterator1.hasNext()) {
+            compteClient1 = iterator1.next();
+            ArrayList<CompteBancaire> compteBancaires = (ArrayList<CompteBancaire>) compteClient1.getComptesBancaire();
+            Iterator<CompteBancaire>iterator2 = compteBancaires.iterator();
+            while (iterator2.hasNext()){
+                CompteBancaire compteBancaire = iterator2.next();
+                while (numCompteBancaire.equals(compteBancaire.getNumero())) {
+                    numCompteBancaire = CompteBancaire.genereNouveauNumero();
+                }
             }
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------
+
         //JE CRÉE LE NOUVEAU COMPTE CHÈQUE
         compteCheque = new CompteCheque(numCompteBancaire,TypeCompte.CHEQUE);
         compteClient.ajouter(compteCheque);
         this.comptes.add(compteClient);
         return true;
     }
-    /*MÉTHODE POUR VÉRIFIER LE NIP, utiliser pour verifier le NIP de l'objet de la banque utilisé*/
     /**
      * Retourne le numéro du compte-chèque d'un client à partir de son numéro de compte-client.123
      *

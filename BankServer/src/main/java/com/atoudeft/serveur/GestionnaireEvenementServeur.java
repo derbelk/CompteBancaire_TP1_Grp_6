@@ -184,20 +184,17 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                 case "SELECT" :
                     argument = evenement.getArgument();
                     if (cnx.getNumeroCompteClient()==null) {
-                        cnx.envoyer("aucun compte connecte");
                         cnx.envoyer("SELECT NO");
                         break;
                     }
 
                     if (argument.contentEquals("cheque")) {
-                        cnx.envoyer("Compte cheque selectionnee");
                         Banque banque2 ;
                         banque2 = serveurBanque.getBanque();
-                        cnx.setNumeroCompteActuel(banque2.getNumeroCompteEpargne(cnx.getNumeroCompteClient()));
+                        cnx.setNumeroCompteActuel(banque2.getNumeroCompteParDefaut(cnx.getNumeroCompteClient()));
                         cnx.envoyer("SELECT OK");
                         break;
                     } else if (argument.contentEquals("epargne")) {
-                        cnx.envoyer("Compte epargne selectionnee");
                         Banque banque2;
                         banque2 = serveurBanque.getBanque();
                         cnx.setNumeroCompteActuel(banque2.getNumeroCompteEpargne(cnx.getNumeroCompteClient()));
