@@ -211,13 +211,23 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
 
                 case "DEPOT" :
+                    Character carac;
                     argument = evenement.getArgument();
                     if(cnx.getNumeroCompteClient()== null){
                         cnx.envoyer("NO");
                         break;
                     }
-
-                    cnx.envoyer("NO");
+                    for (int i = 0; i < argument.length(); i++) {
+                        carac = argument.charAt(i);
+                        if (!Character.isDigit(carac)){
+                            cnx.envoyer("NO");
+                            break;
+                        }
+                    }
+                    double argument1 = Double.parseDouble(argument);
+                    banque1 = serveurBanque.getBanque();
+                    banque1.deposer(argument1, cnx.getNumeroCompteActuel());
+                    cnx.envoyer("OK");
                     break;
 
                 case "RETRAIT" :
