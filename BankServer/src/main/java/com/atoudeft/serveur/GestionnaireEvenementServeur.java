@@ -235,7 +235,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     double argument1 = Double.parseDouble(argument);
                     banque1 = serveurBanque.getBanque();
 
-                    if (banque1.deposer(argument1, cnx.getNumeroCompteActuel())){
+                    if (banque1.deposer(argument1, cnx.getNumeroCompteClient())){
                         cnx.envoyer("OK");
                     }
                     else{
