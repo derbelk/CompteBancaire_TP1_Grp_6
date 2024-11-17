@@ -212,24 +212,16 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                 case "DEPOT" :
                     argument = evenement.getArgument();
-                    String compteutilise="test";
-                    if (compteutilise.contentEquals("cheque")){
-                        
+                    if(cnx.getNumeroCompteClient()== null){
+                        cnx.envoyer("NO");
+                        break;
                     }
-                    if (compteutilise.contentEquals("epargne")) {
-                        
-                    }
+
+                    cnx.envoyer("NO");
                     break;
 
                 case "RETRAIT" :
                     argument = evenement.getArgument();
-                    compteutilise=argument;
-                    if (compteutilise.contentEquals("cheque")){
-
-                    }
-                    if (compteutilise.contentEquals("epargne")) {
-
-                    }
                     break;
 
 
