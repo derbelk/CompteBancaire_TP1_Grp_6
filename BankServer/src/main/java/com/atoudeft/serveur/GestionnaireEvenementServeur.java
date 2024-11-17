@@ -332,7 +332,56 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
 
                 case "TRANSFER" :
+                    char carac3;
+
+                    if(cnx.getNumeroCompteClient()== null){
+                        cnx.envoyer("NO");
+                        break;
+                    }
+
                     argument = evenement.getArgument();
+
+                    if (argument.isEmpty()){
+                        cnx.envoyer("NO");
+                        break;
+                    }
+                    String[] args = new String[2];
+
+                    args = argument.split(" ");
+
+                    String montant = args[0];
+                    String numeroCompte = args[1];
+
+                    for (int i = 0; i < montant.length(); i++) {
+                        carac2 = montant.charAt(i);
+                        if (!Character.isDigit(carac2)) {
+                            cnx.envoyer("NO");
+                            break;
+                        }
+                    }
+
+                    double montant1 = Double.parseDouble(montant);
+
+
+                    banque = serveurBanque.getBanque();
+                    ArrayList<CompteClient>comptes1 = (ArrayList<CompteClient>) banque.getComptes();
+
+                    CompteClient compteClient1 = banque.getCompteClient(numeroCompte);
+
+                    if(compteClient1 == null){
+                        cnx.envoyer("LE COMPTE CLIENT N'EXISTE PAS !");
+                        break;
+                    }
+                    if (banque.transferer(montant1, cnx.getNumeroCompteClient(), numeroCompte)){
+                        cnx.envoyer("OK");
+                        break;
+                    }
+                    else{
+                        cnx.envoyer("NO");
+                    }
+
+
+
 
                     break;
 

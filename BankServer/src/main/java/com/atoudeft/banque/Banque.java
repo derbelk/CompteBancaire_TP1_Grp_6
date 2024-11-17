@@ -151,13 +151,13 @@ public class Banque implements Serializable {
      */
     public boolean transferer(double montant, String numeroCompteInitial, String numeroCompteFinal) {
         //throw new NotImplementedException();
-        boolean tranfert = false;
+        boolean transfert = false;
 
-        retirer(montant,numeroCompteInitial);
-        deposer(montant,numeroCompteFinal);
-        tranfert=true;
+        if (retirer(montant,numeroCompteInitial) && deposer(montant,numeroCompteFinal))
+            transfert=true;
 
-        return tranfert;
+
+        return transfert;
     }
 
     /**
