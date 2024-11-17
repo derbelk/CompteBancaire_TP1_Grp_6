@@ -7,7 +7,6 @@ import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
 
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -231,22 +230,45 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     break;
 
                 case "RETRAIT" :
+                    Character carac1;
                     argument = evenement.getArgument();
+                    if(cnx.getNumeroCompteClient()== null ){
+                        cnx.envoyer("NO");
+                        break;
+                    }
+                    for (int i = 0; i < argument.length(); i++) {
+                        carac1 = argument.charAt(i);
+                        if (!Character.isDigit(carac1)){
+                            cnx.envoyer("NO");
+                            break;
+                        }
+                    }
+                    double argument2 = Double.parseDouble(argument);
+                    banque1 = serveurBanque.getBanque();
+                    banque1.retirer(argument2, cnx.getNumeroCompteActuel());
+                    cnx.envoyer("OK");
                     break;
 
-
                 case "FACTURE" :
+                    // a revisiter
+
                     argument = evenement.getArgument();
                     t = argument.split("//s+-");
-                    String montant = t[0];
+                    double montant = Double.parseDouble(t[0]);
                     String numfacture = t[1];
                     String descfacture = t[2];
 
-                    cnx.envoyer(montant);
+                    //cnx.envoyer(montant);
                     cnx.envoyer(numfacture);
                     cnx.envoyer(descfacture);
 
+                    double argument3;
+
+                    banque1 = serveurBanque.getBanque();
+                    banque1.payerFacture(montant, cnx.getNumeroCompteActuel(), numfacture,descfacture);
+                    cnx.envoyer("OK");
                     break;
+
 
                 case "TRANSFER" :
                     argument = evenement.getArgument();

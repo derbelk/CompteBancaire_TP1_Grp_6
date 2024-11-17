@@ -1,14 +1,11 @@
 package com.atoudeft.banque;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.swing.text.html.HTMLDocument;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class Banque implements Serializable {
     private String nom;
@@ -74,6 +71,7 @@ public class Banque implements Serializable {
      */
     public boolean deposer(double montant, String numeroCompte) {
         //throw new NotImplementedException();
+
         boolean depot = false;
         CompteClient compteClient = getCompteClient(numeroCompte);
         ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
@@ -96,7 +94,23 @@ public class Banque implements Serializable {
      * @return true si le retrait s'est effectué correctement
      */
     public boolean retirer(double montant, String numeroCompte) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+
+        boolean retrait = false;
+        CompteClient compteClient = getCompteClient(numeroCompte);
+        ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
+        Iterator<CompteBancaire>iterator = compteBancaires.iterator();
+        while (iterator.hasNext()){
+            CompteBancaire compteBancaire = iterator.next();
+            if (compteBancaire.solde<0)
+                retrait=false;
+
+            compteBancaire.solde += montant;
+            retrait = true;
+
+        }
+
+        return retrait;
     }
 
     /**
@@ -108,7 +122,14 @@ public class Banque implements Serializable {
      * @return true si l'opération s'est déroulée correctement
      */
     public boolean transferer(double montant, String numeroCompteInitial, String numeroCompteFinal) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        boolean tranfert = false;
+
+        retirer(montant,numeroCompteInitial);
+        deposer(montant,numeroCompteFinal);
+        tranfert=true;
+
+        return tranfert;
     }
 
     /**
