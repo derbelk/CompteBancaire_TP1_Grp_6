@@ -1,7 +1,7 @@
 package com.atoudeft.banque;
 
 public class CompteEpargne extends CompteBancaire {
-    private static int limiteSolde = 1000;
+    private int limiteSolde = 1000;
     private int fraisOperation = 2;
     private double tauxInteret;
 
