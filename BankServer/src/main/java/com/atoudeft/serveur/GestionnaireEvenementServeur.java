@@ -138,6 +138,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                                 cnx.setNumeroCompteClient(numCompteClient);
                                 cnx.setNumeroCompteActuel(numCompteClient);
                                 cnx.envoyer("CONNECT OK");
+                                break;
                             }
                         }
                     // QUESTRION 3 ?
@@ -145,7 +146,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
                         break;
                     }
-
+                    break;
 
                 case "EPARGNE":
                     if(cnx.getNumeroCompteClient() == null){
@@ -157,6 +158,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         cnx.envoyer("EPARGNE NO");
                         break;
                     }
+
 
                     String numeroCompteB = CompteBancaire.genereNouveauNumero();
                     CompteClient compteClients;
@@ -210,8 +212,14 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
 
 
                 case "DEPOT" :
-                    Character carac;
+                    char carac;
                     argument = evenement.getArgument();
+
+                    /*if (argument.isEmpty()) {
+                        cnx.envoyer("NO");
+                        break;
+                    }*/
+
                     if(cnx.getNumeroCompteClient()== null){
                         cnx.envoyer("NO");
                         break;
