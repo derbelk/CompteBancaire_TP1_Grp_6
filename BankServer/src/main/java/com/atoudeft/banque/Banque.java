@@ -214,8 +214,29 @@ public class Banque implements Serializable {
      * @return numéro du compte-chèque du client ayant le numéro de compte-client
      */
     public String getNumeroCompteParDefaut(String numCompteClient) {
-        CompteClient compteClient= getCompteClient(numCompteClient);
+        CompteClient compteClient = getCompteClient(numCompteClient);
 
+        if (compteClient == null) {
+            return null;
+        }
+
+        Iterator<CompteBancaire> iterator = compteClient.getComptesBancaire().iterator();
+
+        while (iterator.hasNext()) {
+            CompteBancaire compte = iterator.next();
+            if (compte != null && compte.getType().equals(TypeCompte.CHEQUE)) {
+                return compte.getNumero();
+            }
+        }
+        return null;
+    }
+        /**
+         *CETTE MÉTHODE EST UTILISÉE POUR VÉRIFIER SI LE CLIENT POSSÈDE UN COMPTE ÉPARGNE !
+         */
+
+
+    public String getNumeroCompteEpargne (String numCompteClient){
+        CompteClient compteClient = getCompteClient(numCompteClient);
         if(compteClient == null){
             return null;
         }
@@ -225,15 +246,10 @@ public class Banque implements Serializable {
         while (iterator.hasNext())
         {
             CompteBancaire compte = iterator.next();
-            if(compte!=null && compte.getType().equals(TypeCompte.CHEQUE)){
+            if(compte!=null && compte.getType().equals(TypeCompte.EPARGNE)){
                 return compte.getNumero();
             }
         }
         return null;
-        /**
-         *CETTE MÉTHODE EST UTILISÉE POUR VÉRIFIER SI LE CLIENT POSSÈDE UN COMPTE ÉPARGNE !
-         */
-
     }
-
 }
