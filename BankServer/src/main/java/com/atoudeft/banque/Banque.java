@@ -95,6 +95,7 @@ public class Banque implements Serializable {
             }
         }
 
+
         return depot;
     }
 
@@ -119,14 +120,14 @@ public class Banque implements Serializable {
                 CompteBancaire compteBancaire = iterator.next();
                 if (compteBancaire.getType().equals(TypeCompte.CHEQUE)) {
                     compteCheque = (CompteCheque) compteBancaire;
-                    compteCheque.debiter(montant);
-                    retrait = true;
+                    if (compteCheque.debiter(montant))
+                        retrait = true;
                 }
                 if (compteBancaire.getType().equals(TypeCompte.EPARGNE)){
                     assert compteBancaire instanceof CompteEpargne;
                     compteEpargne = (CompteEpargne) compteBancaire;
-                    compteEpargne.debiter(montant);
-                    retrait = true;
+                    if (compteEpargne.debiter(montant))
+                        retrait = true;
                 }
             }
 

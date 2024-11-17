@@ -22,7 +22,7 @@ public  class CompteCheque extends CompteBancaire{
 
     @Override
     public   boolean debiter(double montant) {
-        if((montant> 0) && (solde>= montant)){
+        if(solde >= montant){
             solde -= montant;
             return true ;
         }

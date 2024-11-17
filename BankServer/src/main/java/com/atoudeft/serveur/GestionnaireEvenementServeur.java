@@ -260,6 +260,7 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                         cnx.envoyer("NO");
                         break;
                     }
+
                     for (int i = 0; i < argument.length(); i++) {
                         carac1 = argument.charAt(i);
                         if (!Character.isDigit(carac1)){
@@ -267,14 +268,18 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                             break;
                         }
                     }
+
                     double argument2 = Double.parseDouble(argument);
                     banque1 = serveurBanque.getBanque();
 
-                    if (banque1.retirer(argument2, cnx.getNumeroCompteActuel())){
+                    if (banque1.retirer(argument2, cnx.getNumeroCompteClient())){
                         cnx.envoyer("OK");
+
+                    }
+                    else{
+                        cnx.envoyer("NO");
                         break;
                     }
-
 
                     break;
 
