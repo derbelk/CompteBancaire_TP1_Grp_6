@@ -231,22 +231,32 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                             break;
                         }
                     }
+
                     double argument1 = Double.parseDouble(argument);
                     banque1 = serveurBanque.getBanque();
 
                     if (banque1.deposer(argument1, cnx.getNumeroCompteActuel())){
                         cnx.envoyer("OK");
+                    }
+                    else{
+                        cnx.envoyer("DEPOT NON EFFECTUÉ");
                         break;
                     }
-
 
 
                     break;
 
                 case "RETRAIT" :
-                    Character carac1;
+
+                    char carac1;
                     argument = evenement.getArgument();
-                    if(cnx.getNumeroCompteClient()== null ){
+
+                    if (argument.isEmpty()) {
+                        cnx.envoyer("NO");
+                        break;
+                    }
+
+                    if(cnx.getNumeroCompteClient()== null){
                         cnx.envoyer("NO");
                         break;
                     }
@@ -259,8 +269,13 @@ public class GestionnaireEvenementServeur implements GestionnaireEvenement {
                     }
                     double argument2 = Double.parseDouble(argument);
                     banque1 = serveurBanque.getBanque();
-                    banque1.retirer(argument2, cnx.getNumeroCompteActuel());
-                    cnx.envoyer("OK");
+
+                    if (banque1.retirer(argument2, cnx.getNumeroCompteActuel())){
+                        cnx.envoyer("OK");
+                        break;
+                    }
+
+
                     break;
 
                 case "FACTURE" :

@@ -93,13 +93,7 @@ public class Banque implements Serializable {
                     depot = true;
                 }
             }
-
-            return depot;
         }
-
-
-
-
 
         return depot;
     }
@@ -114,19 +108,34 @@ public class Banque implements Serializable {
     public boolean retirer(double montant, String numeroCompte) {
         //throw new NotImplementedException(); rebv
 
+        CompteCheque compteCheque;
+        CompteEpargne compteEpargne;
         boolean retrait = false;
         CompteClient compteClient = getCompteClient(numeroCompte);
-        ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
-        Iterator<CompteBancaire>iterator = compteBancaires.iterator();
-        while (iterator.hasNext()){
-            CompteBancaire compteBancaire = iterator.next();
-            if (compteBancaire.solde<0)
-                retrait=false;
+        if (compteClient != null){
+            ArrayList<CompteBancaire>compteBancaires = (ArrayList<CompteBancaire>) compteClient.getComptesBancaire();
+            Iterator<CompteBancaire>iterator = compteBancaires.iterator();
+            while (iterator.hasNext()) {
+                CompteBancaire compteBancaire = iterator.next();
+                if (compteBancaire.getType().equals(TypeCompte.CHEQUE)) {
+                    compteCheque = (CompteCheque) compteBancaire;
+                    compteCheque.debiter(montant);
+                    retrait = true;
+                }
+                if (compteBancaire.getType().equals(TypeCompte.EPARGNE)){
+                    assert compteBancaire instanceof CompteEpargne;
+                    compteEpargne = (CompteEpargne) compteBancaire;
+                    compteEpargne.debiter(montant);
+                    retrait = true;
+                }
+            }
 
-            compteBancaire.solde += montant;
-            retrait = true;
-
+            return retrait;
         }
+
+
+
+
 
         return retrait;
     }
