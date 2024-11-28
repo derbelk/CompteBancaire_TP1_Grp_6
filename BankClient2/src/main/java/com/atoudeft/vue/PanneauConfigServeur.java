@@ -16,17 +16,25 @@ public class PanneauConfigServeur extends JPanel {
 
     public PanneauConfigServeur() {
         //à compléter
-        JPanel panel = new JPanel(new GridLayout(4,1));
+
+        JPanel p1 = new JPanel();
+        JPanel p2= new JPanel();
+        p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
+
+
         JLabel lAdrServeur = new JLabel("Adresse IP : ");
         JLabel lNumPort = new JLabel("Port : ");
 
         txtAdrServeur = new JTextField(Config.ADRESSE_SERVEUR,15);
         txtNumPort = new JTextField(String.valueOf(Config.PORT_SERVEUR),5);
 
-        panel.add(lAdrServeur,txtAdrServeur);
+
+        this.add(p1.add(lAdrServeur));
         //panel.add(lAdrServeur);
-        //panel.add(txtAdrServeur);
-        panel.add(lNumPort,txtNumPort);
+        this.add(p1.add(txtAdrServeur));
+
+        this.add(p2.add(lNumPort));
+        this.add(p2.add(txtNumPort));
         //panel.add(lNumPort);
         //panel.add(txtNumPort);
 
