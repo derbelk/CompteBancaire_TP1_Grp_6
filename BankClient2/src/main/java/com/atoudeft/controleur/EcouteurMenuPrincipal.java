@@ -57,8 +57,14 @@ public class EcouteurMenuPrincipal implements ActionListener {
                     //JPanel panneauconfig =;
 
 
-                    res = JOptionPane.showConfirmDialog(fenetre,"Panneau de configuration","Configuration Serveur",
+
+                    res = JOptionPane.showConfirmDialog(fenetre,new PanneauConfigServeur(),"Configuration Serveur",
                             JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+
+
+                    //JOptionPane.showMessageDialog(fenetre,new PanneauConfigServeur());
+                            //JOptionPane.showConfirmDialog(fenetre,"Panneau de configuration","Configuration Serveur",
+                            //JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                     //TODO : compléter (question 1.3)
                     break;
                 case "QUITTER":
