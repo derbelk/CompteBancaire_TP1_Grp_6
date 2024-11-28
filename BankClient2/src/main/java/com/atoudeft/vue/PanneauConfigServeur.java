@@ -1,5 +1,7 @@
 package com.atoudeft.vue;
 
+import com.atoudeft.client.Config;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,19 +14,21 @@ import java.awt.*;
 public class PanneauConfigServeur extends JPanel {
     private JTextField txtAdrServeur, txtNumPort;
 
-    public PanneauConfigServeur(String adr, int port) {
+    public PanneauConfigServeur() {
         //à compléter
-        JPanel panel = new JPanel();
-        JLabel lAdrServeur = new JLabel("Adresse IP : "),
-                lNumPort = new JLabel("Port : ");
+        JPanel panel = new JPanel(new GridLayout(4,1));
+        JLabel lAdrServeur = new JLabel("Adresse IP : ");
+        JLabel lNumPort = new JLabel("Port : ");
 
-        txtAdrServeur = new JTextField(adr,15);
-        txtNumPort = new JTextField(String.valueOf(port),5);
+        txtAdrServeur = new JTextField(Config.ADRESSE_SERVEUR,15);
+        txtNumPort = new JTextField(String.valueOf(Config.PORT_SERVEUR),5);
 
-        panel.add(lAdrServeur);
-        panel.add(txtAdrServeur);
-        panel.add(lNumPort);
-        panel.add(txtNumPort);
+        panel.add(lAdrServeur,txtAdrServeur);
+        //panel.add(lAdrServeur);
+        //panel.add(txtAdrServeur);
+        panel.add(lNumPort,txtNumPort);
+        //panel.add(lNumPort);
+        //panel.add(txtNumPort);
 
         //txtAdrServeur.setBorder(BorderFactory.createTitledBorder("Adresse IP : "));
         //txtNumPort.setBorder(BorderFactory.createTitledBorder("Port : "));
