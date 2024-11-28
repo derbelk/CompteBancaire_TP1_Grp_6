@@ -15,9 +15,11 @@ public class PanneauConfigServeur extends JPanel {
     private JTextField txtAdrServeur, txtNumPort;
 
     public PanneauConfigServeur() {
-        //1.2
+        //1.2 correction
 
-        JPanel p = new JPanel();
+        JPanel p = new JPanel(new GridLayout(2,1));
+        JPanel p1 = new JPanel();
+        JPanel p2 = new JPanel();
 
         JLabel lAdrServeur = new JLabel("Adresse IP : ");
         JLabel lNumPort = new JLabel("Port : ");
@@ -26,14 +28,17 @@ public class PanneauConfigServeur extends JPanel {
         txtNumPort = new JTextField(String.valueOf(Config.PORT_SERVEUR),5);
 
 
-        this.add(p.add(lAdrServeur));
-        //panel.add(lAdrServeur);
-        this.add(p.add(txtAdrServeur));
+        //this.add(p.add(lAdrServeur));
+        p1.add(lAdrServeur,txtAdrServeur);
+        //p1.add(txtAdrServeur);
+        //this.add(p.add(txtAdrServeur));
 
-        this.add(p.add(lNumPort));
-        this.add(p.add(txtNumPort));
-        //panel.add(lNumPort);
-        //panel.add(txtNumPort);
+        //this.add(p.add(lNumPort));
+        //this.add(p.add(txtNumPort));
+        p2.add(lNumPort,txtNumPort);
+        //p2.add(txtNumPort);
+
+        p.add(p1);
 
         //txtAdrServeur.setBorder(BorderFactory.createTitledBorder("Adresse IP : "));
         //txtNumPort.setBorder(BorderFactory.createTitledBorder("Port : "));
