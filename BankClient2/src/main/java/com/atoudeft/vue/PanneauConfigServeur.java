@@ -17,12 +17,12 @@ public class PanneauConfigServeur extends JPanel {
     public PanneauConfigServeur() {
         //1.2 correction
 
-        JPanel p = new JPanel(new GridLayout(2,1));
+        JPanel p = new JPanel(new GridLayout(2,2));
         JPanel p1 = new JPanel();
         JPanel p2 = new JPanel();
 
-        JLabel lAdrServeur = new JLabel("Adresse IP : ");
-        JLabel lNumPort = new JLabel("Port : ");
+        JLabel lAdrServeur = new JLabel("Adresse IP:");
+        JLabel lNumPort = new JLabel("Port:");
 
         txtAdrServeur = new JTextField(Config.ADRESSE_SERVEUR,15);
         txtNumPort = new JTextField(String.valueOf(Config.PORT_SERVEUR),5);
@@ -37,8 +37,13 @@ public class PanneauConfigServeur extends JPanel {
         //this.add(p.add(txtNumPort));
         p2.add(lNumPort,txtNumPort);
         //p2.add(txtNumPort);
-
         p.add(p1);
+        p.add(txtAdrServeur);
+        p.add(p2);
+        p.add(txtNumPort);
+
+        this.add(p);
+
 
         //txtAdrServeur.setBorder(BorderFactory.createTitledBorder("Adresse IP : "));
         //txtNumPort.setBorder(BorderFactory.createTitledBorder("Port : "));
