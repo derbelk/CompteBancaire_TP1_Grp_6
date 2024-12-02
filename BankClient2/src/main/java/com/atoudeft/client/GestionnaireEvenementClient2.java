@@ -83,7 +83,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 case "EPARGNE" :
                     //Question 2.1
                     arg = evenement.getArgument();
-                   /* if (arg.trim().startsWith("NO")){
+                    if (arg.trim().startsWith("NO")){
                         JOptionPane.showMessageDialog(panneauPrincipal,"Création de compte épargne échoué");
                     }
                     else {

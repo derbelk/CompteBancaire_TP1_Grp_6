@@ -1,6 +1,7 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauOperationsCompte;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,9 +10,7 @@ import java.awt.event.ActionListener;
 public class EcouteurOperationsCompte implements ActionListener {
     private Client client;
 
-    public EcouteurOperationsCompte(Client client) {
-        this.client = client;
-    }
+    public EcouteurOperationsCompte(Client client) {this.client = client;}
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -24,7 +23,8 @@ public class EcouteurOperationsCompte implements ActionListener {
 
             if ("EPARGNE".equals(action)){
 
-                JOptionPane.showMessageDialog(null, "Okay on est bon");
+                client.envoyer("EPARGNE");
+                //JOptionPane.showMessageDialog(null, "Okay on est bon");
             }
         }
 
