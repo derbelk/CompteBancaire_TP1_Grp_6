@@ -24,11 +24,12 @@ public class PanneauConfigServeur extends JPanel {
         JLabel lAdrServeur = new JLabel("Adresse IP:");
         JLabel lNumPort = new JLabel("Port:");
 
-        txtAdrServeur = new JTextField(Config.ADRESSE_SERVEUR,15);
-        txtNumPort = new JTextField(String.valueOf(Config.PORT_SERVEUR),5);
+        txtAdrServeur = new JTextField(15);
+        txtNumPort = new JTextField(5);
 
 
         //this.add(p.add(lAdrServeur));
+
         p1.add(lAdrServeur,txtAdrServeur);
         //p1.add(txtAdrServeur);
         //this.add(p.add(txtAdrServeur));
