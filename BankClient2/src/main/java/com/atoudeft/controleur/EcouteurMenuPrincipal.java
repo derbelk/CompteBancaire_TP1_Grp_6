@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 public class EcouteurMenuPrincipal implements ActionListener {
     private Client client;
     private JFrame fenetre;
+    //Question 2.1
+    private Client epargne;
 
     public EcouteurMenuPrincipal(Client client, JFrame fenetre) {
         this.client = client;
@@ -62,34 +64,30 @@ public class EcouteurMenuPrincipal implements ActionListener {
                                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                         if (res == 0) {
-                            String numeroPort = panneauConfigServeur.getPortServeur();
 
                             while (!okay) {
-
+                                String numeroPort = panneauConfigServeur.getPortServeur();
                                 try {
                                     port = Integer.parseInt(numeroPort);
-                                    okay = true;
                                     JOptionPane.showMessageDialog(panneauConfigServeur, "Okay c'est un int " + numeroPort);
-                                    break;
+                                    okay = true;
+
                                 } catch (Exception exception) {
-                                    JOptionPane.showMessageDialog(panneauConfigServeur, "Non c'est un String");
+                                    JOptionPane.showMessageDialog(panneauConfigServeur, "Le numéro ne doit pas être String",
+                                            "Choix invalide", JOptionPane.ERROR_MESSAGE);
 
                                     res = JOptionPane.showConfirmDialog(fenetre, panneauConfigServeur, "Configuration Serveur",
                                             JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                                    okay = false;
+                                    //okay = false;
                                 }
 
                             }
                         }
-
-
-
-
-
-
-
-
-
+                        else {
+                            JOptionPane.showMessageDialog(fenetre,"configuration annullée",
+                                    "Information",JOptionPane.INFORMATION_MESSAGE);
+                            break;
+                        }
                     //JOptionPane.showMessageDialog(fenetre,new PanneauConfigServeur());
                             //JOptionPane.showConfirmDialog(fenetre,"Panneau de configuration","Configuration Serveur",
                             //JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
