@@ -61,21 +61,27 @@ public class EcouteurMenuPrincipal implements ActionListener {
                         res = JOptionPane.showConfirmDialog(fenetre,  panneauConfigServeur, "Configuration Serveur",
                                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                        if (res == 0){
+                        if (res == 0) {
                             String numeroPort = panneauConfigServeur.getPortServeur();
 
-                            while (!okay)
-                                try{
+                            while (!okay) {
+
+                                try {
                                     port = Integer.parseInt(numeroPort);
                                     okay = true;
-                                    JOptionPane.showMessageDialog(panneauConfigServeur,"Okay c'est un int "+numeroPort);
-                                } catch (Exception exception){
-                                    JOptionPane.showMessageDialog(panneauConfigServeur,"Non c'est un String");
-                                    okay = false;
-                                    res = JOptionPane.showConfirmDialog(fenetre,  panneauConfigServeur, "Configuration Serveur",
+                                    JOptionPane.showMessageDialog(panneauConfigServeur, "Okay c'est un int " + numeroPort);
+                                    break;
+                                } catch (Exception exception) {
+                                    JOptionPane.showMessageDialog(panneauConfigServeur, "Non c'est un String");
+
+                                    res = JOptionPane.showConfirmDialog(fenetre, panneauConfigServeur, "Configuration Serveur",
                                             JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                                 }
+                                    okay = false;
+                                }
+
+                            }
                         }
+
 
 
 
