@@ -3,6 +3,7 @@ package com.atoudeft.client;
 import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
+import com.atoudeft.vue.PanneauOperationsCompte;
 import com.atoudeft.vue.PanneauPrincipal;
 import com.programmes.MainFrame;
 
@@ -95,6 +96,13 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     break;
                 case "SELECT" :
                     arg = evenement.getArgument();
+                    //Question 3.1
+                    if (arg.trim().startsWith("NO")) {
+                        break;
+                    }
+                    else {
+
+                    }
                     JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
                     break;
 
