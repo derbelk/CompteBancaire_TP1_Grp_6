@@ -21,12 +21,14 @@ public class EcouteurOperationsCompte implements ActionListener {
         String action;
         if (source instanceof JButton){
             action = ((JButton)source).getActionCommand();
-            switch (action){
-                case "EPARGNE":
 
-                    break;
+            if ("EPARGNE".equals(action)){
+
+                JOptionPane.showMessageDialog(null, "Okay on est bon");
             }
         }
+
+
 
 
     }
