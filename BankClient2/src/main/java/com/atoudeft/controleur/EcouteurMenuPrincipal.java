@@ -68,7 +68,7 @@ public class EcouteurMenuPrincipal implements ActionListener {
                                 try{
                                     port = Integer.parseInt(numeroPort);
                                     okay = true;
-                                    JOptionPane.showMessageDialog(panneauConfigServeur,"Okay c'est un int");
+                                    JOptionPane.showMessageDialog(panneauConfigServeur,"Okay c'est un int "+numeroPort);
                                 } catch (Exception exception){
                                     JOptionPane.showMessageDialog(panneauConfigServeur,"Non c'est un String");
                                     okay = false;
