@@ -55,10 +55,12 @@ public class EcouteurMenuPrincipal implements ActionListener {
                     break;
                 case "CONFIGURER":
 
-                    PanneauConfigServeur panneauConfigServeur = new PanneauConfigServeur();
+                    //
 
+                    PanneauConfigServeur panneauConfigServeur = new PanneauConfigServeur();
                     int port;
                     boolean okay = false;
+                    //Question 1.3 : Fait
 
                         res = JOptionPane.showConfirmDialog(fenetre,  panneauConfigServeur, "Configuration Serveur",
                                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -88,10 +90,6 @@ public class EcouteurMenuPrincipal implements ActionListener {
                                     "Information",JOptionPane.INFORMATION_MESSAGE);
                             break;
                         }
-                    //JOptionPane.showMessageDialog(fenetre,new PanneauConfigServeur());
-                            //JOptionPane.showConfirmDialog(fenetre,"Panneau de configuration","Configuration Serveur",
-                            //JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-                    //TODO : compléter (question 1.3)
                     break;
                 case "QUITTER":
                     if (client.isConnecte()) {
