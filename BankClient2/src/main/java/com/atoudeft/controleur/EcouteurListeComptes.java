@@ -27,14 +27,19 @@ public class EcouteurListeComptes extends MouseAdapter {
     public void mouseClicked(MouseEvent evt) {
         //à compléter
         //Question 3.1
-        if (evt.getClickCount()==2){
-            //String compteselec;
-            String typecompte = "ePargne";
-            if ( typecompte.equalsIgnoreCase("epargne")){
+        Object source = evt.getSource();
 
+
+            if (evt.getClickCount()==2){
+
+                String text = (String) ((JList<?>) source).getSelectedValue();
+
+                if (text.contains("CHEQUE"))
+                    client.envoyer("SELECT cheque");
+                else if (text.contains("EPARGNE")) {
+                    client.envoyer("SELECT epargne");
+                }
             }
-            JOptionPane.showMessageDialog(null, "Okay on est bon"+ typecompte);
-            //client.envoyer("SELECT" + typecompte);
-        }
+
     }
 }
