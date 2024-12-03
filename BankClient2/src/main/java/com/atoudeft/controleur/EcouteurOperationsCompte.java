@@ -1,6 +1,7 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauEffectuerOperations;
 import com.atoudeft.vue.PanneauOperationsCompte;
 
 import javax.swing.*;
@@ -24,8 +25,19 @@ public class EcouteurOperationsCompte implements ActionListener {
             if ("EPARGNE".equals(action)){
 
                 client.envoyer("EPARGNE");
-                //JOptionPane.showMessageDialog(null, "Okay on est bon");
             }
+
+            if ("DEPOT".equals(action)){
+
+                PanneauEffectuerOperations panneauEffectuerOperations = new PanneauEffectuerOperations();
+
+                //JOptionPane.showMessageDialog(panneauEffectuerOperations, "okay là on veut faire un dépot");
+                panneauEffectuerOperations.setVisible(true);
+
+
+            }
+
+
         }
 
 
