@@ -44,4 +44,8 @@ public class PanneauOperationsCompte extends JPanel {
         bHistorique.addActionListener(ecouteur);
     }
 
+    public void setLblSolde(String solde){
+        lblSolde.setText("Solde : "+ solde);
+    }
+
 }

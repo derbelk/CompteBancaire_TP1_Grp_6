@@ -94,4 +94,9 @@ public class PanneauPrincipal  extends JPanel {
     public void ajouterCompte(String str) {
         numerosComptes.addElement(str);
     }
+
+    public void setPanneauOperationsCompte(String solde){
+        panneauOperationsCompte.setLblSolde(solde);
+    }
+
 }

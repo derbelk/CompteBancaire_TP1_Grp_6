@@ -96,6 +96,9 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     break;
                 case "SELECT" :
                     arg = evenement.getArgument();
+                    String[] arguments = new String[arg.length()];
+                    arguments = arg.split(" ");
+                    String solde = arguments[arguments.length -1];
                     //Question 3.1
                     if (arg.trim().startsWith("NO")) {
                         break;
@@ -103,6 +106,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     else {
 
                     }
+                    panneauPrincipal.setPanneauOperationsCompte(solde);
                     JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
                     break;
 
