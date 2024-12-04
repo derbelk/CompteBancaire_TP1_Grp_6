@@ -1,21 +1,23 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
-import com.atoudeft.vue.PanneauDepot;
-import com.atoudeft.vue.PanneauOperationsCompte;
+import com.atoudeft.vue.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.PrivateKey;
+import java.sql.Struct;
 
 public class EcouteurOperationsCompte implements ActionListener {
     private Client client;
-    private PanneauDepot panneauDepot;
+    //=private PanneauPrincipal panneauPrincipal;
 
     public EcouteurOperationsCompte(Client client) {
         this.client = client;
-        this.panneauDepot = new PanneauDepot();
+        //panneauPrincipal = new PanneauPrincipal(client);
+
 
     }
 
@@ -36,32 +38,153 @@ public class EcouteurOperationsCompte implements ActionListener {
             if ("DEPOT".equals(action)) {
 
                 //JOptionPane.showMessageDialog(panneauDepot,"Voici le panneau de dépot");
+                double montantDepot;
+                int res;
+                boolean operationDepot = false;
 
-                panneauDepot.montrerPanneauDepot();
+                PanneauDepot panneauDepot = new PanneauDepot();
 
+                res = JOptionPane.showConfirmDialog(null, panneauDepot, "Depot",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                //JOptionPane.showMessageDialog(panneauEffectuerOperations, "okay là on veut faire un dépot");
+                if (res == 0){
+
+                    while(!operationDepot) {
+                        String tmontant = panneauDepot.getmontant();
+
+                        try {
+                            montantDepot = Double.parseDouble(tmontant);
+                            JOptionPane.showMessageDialog(panneauDepot, "Ce montant sera déposé dans votre compte " + montantDepot);
+                            operationDepot = true;
+
+                            client.envoyer("DEPOT "+ montantDepot);
+
+                        } catch (Exception exception) {
+                            JOptionPane.showMessageDialog(panneauDepot, "le montant entré doit être un nombre", "Attention", JOptionPane.ERROR_MESSAGE);
+
+                            res = JOptionPane.showConfirmDialog(null, panneauDepot, "Depot",
+                                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                        }
+                    }
+                }
+
 
 
             }
-           /* //else if ("RETRAIT".equals(action)) {
 
+            if ("RETRAIT".equals(action)) {
 
-                //JOptionPane.showMessageDialog(, "okay là on veut faire un retrait");
+                double montantRetrait;
+                int res;
+                boolean operationRetrait = false;
+
+                PanneauRetrait panneauRetrait = new PanneauRetrait();
+
+                res = JOptionPane.showConfirmDialog(null, panneauRetrait, "Retrait",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                if (res == 0) {
+
+                    while (!operationRetrait) {
+                        String tmontant2 = panneauRetrait.getmontant();
+
+                        try {
+                            montantRetrait = Double.parseDouble(tmontant2);
+                            JOptionPane.showMessageDialog(panneauRetrait, "Ce montant sera retiré de votre compte " + montantRetrait);
+                            operationRetrait = true;
+
+                            client.envoyer("RETRAIT " + montantRetrait);
+
+                        } catch (Exception exception) {
+                            JOptionPane.showMessageDialog(panneauRetrait, "le montant entré doit être un nombre", "Attention", JOptionPane.ERROR_MESSAGE);
+
+                            res = JOptionPane.showConfirmDialog(null, panneauRetrait, "Depot",
+                                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                        }
+                    }
+                }
             }
 
-            //else if ("FACTURE".equals(action)) {
+
+            if ("TRANSFER".equals(action)) {
+
+                double montantTransfert;
+                int res;
+                boolean operationTransfert = false;
+
+                PanneauTransfert panneauTransfert = new PanneauTransfert();
+
+                res = JOptionPane.showConfirmDialog(null, panneauTransfert, "Opération de transfert",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                if (res == 0) {
+                    while (!operationTransfert) {
+                        String numeroCompte = panneauTransfert.getNumeroCompte();
+                        String tmontant3 = panneauTransfert.getMontant();
+
+                        try {
+                            montantTransfert = Double.parseDouble(tmontant3);
+                            JOptionPane.showMessageDialog(panneauTransfert, montantTransfert + " seront transférés de votre compte vers le compte " + numeroCompte);
+                            operationTransfert = true;
+
+                            client.envoyer("TRANSFER " + montantTransfert + " " + numeroCompte);
+
+                        } catch (Exception exception) {
+                            JOptionPane.showMessageDialog(panneauTransfert, "le montant entré doit être un nombre", "Attention", JOptionPane.ERROR_MESSAGE);
+
+                            res = JOptionPane.showConfirmDialog(null, panneauTransfert, "Opération de transfert",
+                                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        }
+
+                    }
+                }
+            }
 
 
-            //JOptionPane.showMessageDialog(, "okay là on veut payer une facture");
+            if ("FACTURE".equals(action)) {
+
+                int res;
+                double montant;
+                String textMontant, numeroFacture, description, mois, annee;
+                boolean facturePayee = false;
+                PanneauFacture panneauFacture = new PanneauFacture();
+
+                res = JOptionPane.showConfirmDialog(null, panneauFacture, "Payement de Facture",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                if (res == 0){
+                    while (!facturePayee){
+                        textMontant = panneauFacture.getMontant();
+                        numeroFacture = panneauFacture.getNumeroFacture();
+                        description = panneauFacture.getDescription();
+                        mois = (String)panneauFacture.getMois();
+                        annee = (String)panneauFacture.getAnnee();
+
+                        try{
+                            montant = Double.parseDouble(textMontant);
+                            JOptionPane.showMessageDialog(panneauFacture, montant+" "+ numeroFacture+" "+description+" "+ mois+ " "+annee);
+                            client.envoyer("FACTURE "+montant+" "+ numeroFacture+" "+description+" "+ mois+ " "+annee);
+                            facturePayee = true;
+                        } catch (Exception exception){
+
+                            JOptionPane.showMessageDialog(panneauFacture, "le montant entré doit être un nombre", "Attention", JOptionPane.ERROR_MESSAGE);
+
+                            res = JOptionPane.showConfirmDialog(null, panneauFacture, "Payement de Facture",
+                                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+
         }
-            //else if ("TRANSFER".equals(action)) {
 
-
-                //JOptionPane.showMessageDialog(, "okay là on veut tranferer vers un autre compte");
-            }*/
-
-
-        }
     }
 }

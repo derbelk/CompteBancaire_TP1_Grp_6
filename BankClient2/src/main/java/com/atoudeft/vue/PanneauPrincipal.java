@@ -26,6 +26,7 @@ public class PanneauPrincipal  extends JPanel {
     private DefaultListModel<String> numerosComptes;
     private JList<String> jlNumerosComptes;
     private JDesktopPane bureau;
+    private PanneauDepot panneauDepot;
 
 
     public PanneauPrincipal(Client client) {
@@ -64,6 +65,13 @@ public class PanneauPrincipal  extends JPanel {
         this.add(panneauConnexion, BorderLayout.NORTH);
         this.add(panneauCompteClient, BorderLayout.CENTER);
         panneauCompteClient.setVisible(false);
+
+
+
+        //Question 4.1
+
+
+
     }
 
     /**
@@ -99,5 +107,6 @@ public class PanneauPrincipal  extends JPanel {
     public void setPanneauOperationsCompte(String solde){
         panneauOperationsCompte.setLblSolde(solde);
     }
+
 
 }

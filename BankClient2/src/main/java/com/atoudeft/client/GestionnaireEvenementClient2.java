@@ -125,7 +125,12 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     break;
                 case "TRANSFER" :
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"TRANSFER " + arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(panneauPrincipal, "Un problème a été rencontré lors du transfert. Vérifier votre solde ou le numéro du compte vers lequel vous voulez effectuer cette opération","Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(panneauPrincipal, "TRANSFER " + arg);
+                    }
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default:
