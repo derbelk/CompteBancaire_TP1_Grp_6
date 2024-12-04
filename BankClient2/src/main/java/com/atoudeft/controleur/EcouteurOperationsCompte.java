@@ -180,8 +180,15 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                 }
 
-
             }
+
+           /* if ("HIST".equals(action)){
+
+
+                PanneauHistorique panneauHistorique = new PanneauHistorique();
+
+                JOptionPane.showMessageDialog( panneauHistorique, "essai") ;
+            }*/
 
 
         }
