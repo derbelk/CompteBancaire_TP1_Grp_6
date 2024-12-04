@@ -54,7 +54,7 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                         try {
                             montantDepot = Double.parseDouble(tmontant);
-                            JOptionPane.showMessageDialog(panneauDepot, "Ce montant sera déposé dans votre compte " + montantDepot);
+                            //JOptionPane.showMessageDialog(panneauDepot, "Ce montant sera déposé dans votre compte " + montantDepot);
                             operationDepot = true;
 
                             client.envoyer("DEPOT "+ montantDepot);
@@ -91,7 +91,7 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                         try {
                             montantRetrait = Double.parseDouble(tmontant2);
-                            JOptionPane.showMessageDialog(panneauRetrait, "Ce montant sera retiré de votre compte " + montantRetrait);
+                            //JOptionPane.showMessageDialog(panneauRetrait, "Ce montant sera retiré de votre compte " + montantRetrait);
                             operationRetrait = true;
 
                             client.envoyer("RETRAIT " + montantRetrait);

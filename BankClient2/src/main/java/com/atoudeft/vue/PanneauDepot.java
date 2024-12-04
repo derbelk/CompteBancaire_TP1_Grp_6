@@ -20,7 +20,7 @@ public class PanneauDepot extends JPanel {
 
         panneauOp.add(jmontant);
         panneauOp.add(jTextField);
-        this.add(panneauOp);
+        this.add(panneauOp, BorderLayout.CENTER);
 
 
     }

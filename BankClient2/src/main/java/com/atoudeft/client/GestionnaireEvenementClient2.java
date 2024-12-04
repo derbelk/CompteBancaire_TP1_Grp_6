@@ -46,7 +46,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
 //                case "HIST": //Le serveur a renvoyé
 //                    panneauPrincipal.setVisible(true);
 //                    JOptionPane.showMessageDialog(null,"Panneau visible");
-//                    cnx.envoyer("LIST");
+//                    client.envoyer("LIST");
 //                    arg = evenement.getArgument();
 //                    break;
                 case "OK":
@@ -90,10 +90,12 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     }
                     else {
                         panneauPrincipal.montrerPanneauCompteClient();
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Compte Épargne créé avec succés");
                     }
                     //*/
 
-                    JOptionPane.showMessageDialog(panneauPrincipal,"EPARGNE "+arg);
+                    //JOptionPane.showMessageDialog(panneauPrincipal,"EPARGNE "+arg);
+                    //JOptionPane.showMessageDialog(panneauPrincipal,"Compte Épargne créé avec succés");
                     break;
                 case "SELECT" :
                     arg = evenement.getArgument();
@@ -108,21 +110,25 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
 
                     }
                     panneauPrincipal.setPanneauOperationsCompte(solde);
-                    JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
+                    //JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
+                    JOptionPane.showMessageDialog(panneauPrincipal,"Compte séléctionné : "+ arg);
                     break;
 
                 /******************* OPÉRATIONS BANCAIRES *******************/
                 case "DEPOT" :
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"DEPOT "+arg);
+                    JOptionPane.showMessageDialog(panneauPrincipal,"Dépot effectué avec succées");
+                    //JOptionPane.showMessageDialog(panneauPrincipal,"DEPOT "+arg);
                     break;
                 case "RETRAIT" :
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"RETRAIT "+arg);
+                    JOptionPane.showMessageDialog(panneauPrincipal,"Retrait effectué avec succées");
+                    //JOptionPane.showMessageDialog(panneauPrincipal,"RETRAIT "+arg);
                     break;
                 case "FACTURE" :
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"FACTURE" + arg);
+                    JOptionPane.showMessageDialog(panneauPrincipal,"Facture payé");
+                    //JOptionPane.showMessageDialog(panneauPrincipal,"FACTURE" + arg);
                     break;
                 case "TRANSFER" :
                     arg = evenement.getArgument();
@@ -130,14 +136,14 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         JOptionPane.showMessageDialog(panneauPrincipal, "Un problème a été rencontré lors du transfert. Vérifier votre solde ou le numéro du compte vers lequel vous voulez effectuer cette opération","Erreur", JOptionPane.ERROR_MESSAGE);
                     }
                     else {
-                        JOptionPane.showMessageDialog(panneauPrincipal, "TRANSFER " + arg);
+                        JOptionPane.showMessageDialog(panneauPrincipal, "Transfert effectué avec succées");
+                        //JOptionPane.showMessageDialog(panneauPrincipal, "TRANSFER " + arg);
                     }
                     break;
 
                 case "HIST" :
                     arg = evenement.getArgument();
                     PanneauHistorique panneauHistorique = new PanneauHistorique();
-
                     JOptionPane.showMessageDialog(panneauHistorique, arg);
 
                     break;
