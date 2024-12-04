@@ -144,7 +144,11 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 case "HIST" :
                     arg = evenement.getArgument();
                     PanneauHistorique panneauHistorique = new PanneauHistorique();
-                    JOptionPane.showMessageDialog(panneauHistorique, arg);
+
+                    panneauHistorique.setjTextArea(arg);
+                    JOptionPane.showMessageDialog(null, panneauHistorique, "Historique de transaction", JOptionPane.PLAIN_MESSAGE);
+
+
 
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
