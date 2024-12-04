@@ -5,6 +5,7 @@ import com.atoudeft.vue.PanneauEffectuerOperations;
 import com.atoudeft.vue.PanneauOperationsCompte;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,14 +28,31 @@ public class EcouteurOperationsCompte implements ActionListener {
                 client.envoyer("EPARGNE");
             }
 
-            if ("DEPOT".equals(action)){
+            else if ("DEPOT".equals(action)){
 
                 PanneauEffectuerOperations panneauEffectuerOperations = new PanneauEffectuerOperations();
+
 
                 //JOptionPane.showMessageDialog(panneauEffectuerOperations, "okay là on veut faire un dépot");
                 panneauEffectuerOperations.setVisible(true);
 
 
+            }
+            else if ("RETRAIT".equals(action)) {
+
+
+                //JOptionPane.showMessageDialog(, "okay là on veut faire un retrait");
+            }
+
+            else if ("FACTURE".equals(action)) {
+
+
+            //JOptionPane.showMessageDialog(, "okay là on veut payer une facture");
+        }
+            else if ("TRANSFER".equals(action)) {
+
+
+                //JOptionPane.showMessageDialog(, "okay là on veut tranferer vers un autre compte");
             }
 
 
