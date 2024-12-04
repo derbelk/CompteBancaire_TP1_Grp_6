@@ -3,6 +3,7 @@ package com.atoudeft.client;
 import com.atoudeft.commun.evenement.Evenement;
 import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
+import com.atoudeft.vue.PanneauHistorique;
 import com.atoudeft.vue.PanneauOperationsCompte;
 import com.atoudeft.vue.PanneauPrincipal;
 import com.programmes.MainFrame;
@@ -131,6 +132,14 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     else {
                         JOptionPane.showMessageDialog(panneauPrincipal, "TRANSFER " + arg);
                     }
+                    break;
+
+                case "HIST" :
+                    arg = evenement.getArgument();
+                    PanneauHistorique panneauHistorique = new PanneauHistorique();
+
+                    JOptionPane.showMessageDialog(panneauHistorique, arg);
+
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default:
