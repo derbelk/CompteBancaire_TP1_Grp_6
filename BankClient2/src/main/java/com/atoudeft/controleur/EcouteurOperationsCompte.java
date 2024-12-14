@@ -70,7 +70,6 @@ public class EcouteurOperationsCompte implements ActionListener {
                 }
 
 
-
             }
 
             if ("RETRAIT".equals(action)) {
@@ -102,9 +101,11 @@ public class EcouteurOperationsCompte implements ActionListener {
                             res = JOptionPane.showConfirmDialog(null, panneauRetrait, "Depot",
                                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
+
                         }
                     }
                 }
+
             }
 
 
@@ -136,10 +137,12 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                             res = JOptionPane.showConfirmDialog(null, panneauTransfert, "Opération de transfert",
                                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
                         }
 
                     }
                 }
+
             }
 
 
@@ -164,15 +167,18 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                         try{
                             montant = Double.parseDouble(textMontant);
-                            JOptionPane.showMessageDialog(panneauFacture, montant+" "+ numeroFacture+" "+description+" "+ mois+ " "+annee);
                             client.envoyer("FACTURE "+montant+" "+ numeroFacture+" "+description+" "+ mois+ " "+annee);
                             facturePayee = true;
                         } catch (Exception exception){
 
                             JOptionPane.showMessageDialog(panneauFacture, "le montant entré doit être un nombre", "Attention", JOptionPane.ERROR_MESSAGE);
 
+
                             res = JOptionPane.showConfirmDialog(null, panneauFacture, "Payement de Facture",
                                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+
+
 
                         }
 
@@ -185,8 +191,8 @@ public class EcouteurOperationsCompte implements ActionListener {
            if ("HIST".equals(action)){
 
                client.envoyer("HIST");
-               //MISE À JOUR DU HISTORIQUE----
             }
+
 
 
         }

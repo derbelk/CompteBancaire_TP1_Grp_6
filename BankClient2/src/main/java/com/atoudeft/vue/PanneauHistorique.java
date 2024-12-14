@@ -10,7 +10,7 @@ public class PanneauHistorique extends JPanel {
         JPanel panneau = new JPanel();
         jTextArea = new JTextArea();
 
-        jTextArea.setEditable(true);
+        jTextArea.setEditable(false);
 
         panneau.add(jTextArea);
 

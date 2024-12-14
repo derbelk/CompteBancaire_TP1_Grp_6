@@ -85,26 +85,34 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 case "EPARGNE" :
                     //Question 2.1
                     arg = evenement.getArgument();
+
                     if (arg.trim().startsWith("NO")){
                         JOptionPane.showMessageDialog(panneauPrincipal,"Création de compte épargne échoué");
                     }
                     else {
-                        panneauPrincipal.montrerPanneauCompteClient();
-                        JOptionPane.showMessageDialog(panneauPrincipal,"Compte Épargne créé avec succés");
+                        str = arg.substring(arg.indexOf("OK")+2).trim();
+                        t = str.split(":");
+                        for (String s:t) {
+                            panneauPrincipal.ajouterCompte(s.substring(0,s.indexOf("]")+1));
+                        }
+
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Compte Épargne créé avec succés "+ str);
+
+                        panneauPrincipal.ajouterCompte(arg.substring(arg.indexOf("]")+4));
                     }
                     //*/
-
-                    //JOptionPane.showMessageDialog(panneauPrincipal,"EPARGNE "+arg);
-                    //JOptionPane.showMessageDialog(panneauPrincipal,"Compte Épargne créé avec succés");
                     break;
                 case "SELECT" :
                     arg = evenement.getArgument();
-                    String[] arguments ;
+                    String[] arguments = new String[arg.length()];
                     arguments = arg.split(" ");
                     String solde = arguments[arguments.length -1];
                     //Question 3.1
                     if (arg.trim().startsWith("NO")) {
-                        break;
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Aucun compte selectionné");
+                    }
+                    else {
+
                     }
                     panneauPrincipal.setPanneauOperationsCompte(solde);
                     //JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
@@ -114,18 +122,48 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 /******************* OPÉRATIONS BANCAIRES *******************/
                 case "DEPOT" :
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"Dépot effectué avec succées");
-                    //JOptionPane.showMessageDialog(panneauPrincipal,"DEPOT "+arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Dépot non effectué");
+                    }
+                    else {
+                        //JOptionPane.showMessageDialog(panneauPrincipal,"Dépot effectué avec succées");
+                        String[] arguments1 = new String[arg.length()];
+                        arguments = arg.split(" ");
+                        String solde1 = arguments[arguments.length -1];
+                        JOptionPane.showMessageDialog(panneauPrincipal, "DEPOT " + arg);
+                        panneauPrincipal.setPanneauOperationsCompte(solde1);
+                    }
+
                     break;
                 case "RETRAIT" :
                     arg = evenement.getArgument();
+
+                    if (arg.trim().startsWith("NO")) {
+                    JOptionPane.showMessageDialog(panneauPrincipal,"Retrait non effectué");
+                }
+                    else{
+                    String[] arguments1 = new String[arg.length()];
+                    arguments = arg.split(" ");
+                    String solde1 = arguments[arguments.length -1];
                     JOptionPane.showMessageDialog(panneauPrincipal,"Retrait effectué avec succées");
-                    //JOptionPane.showMessageDialog(panneauPrincipal,"RETRAIT "+arg);
-                    break;
+                    panneauPrincipal.setPanneauOperationsCompte(solde1);
+                }
+                //JOptionPane.showMessageDialog(panneauPrincipal,"RETRAIT "+arg);
+                break;
                 case "FACTURE" :
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"Facture payé");
-                    //JOptionPane.showMessageDialog(panneauPrincipal,"FACTURE" + arg);
+
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Payement de facture non effectué");
+                    }
+                    else{
+                        String[] arguments1 = new String[arg.length()];
+                        arguments = arg.split(" ");
+                        String solde1 = arguments[arguments.length -1];
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Facture payé");
+                        panneauPrincipal.setPanneauOperationsCompte(solde1);
+                    }
+
                     break;
                 case "TRANSFER" :
                     arg = evenement.getArgument();
@@ -133,7 +171,11 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         JOptionPane.showMessageDialog(panneauPrincipal, "Un problème a été rencontré lors du transfert. Vérifier votre solde ou le numéro du compte vers lequel vous voulez effectuer cette opération","Erreur", JOptionPane.ERROR_MESSAGE);
                     }
                     else {
+                        String[] arguments1 = new String[arg.length()];
+                        arguments = arg.split(" ");
+                        String solde1 = arguments[arguments.length -1];
                         JOptionPane.showMessageDialog(panneauPrincipal, "Transfert effectué avec succées");
+                        panneauPrincipal.setPanneauOperationsCompte(solde1);
                         //JOptionPane.showMessageDialog(panneauPrincipal, "TRANSFER " + arg);
                     }
                     break;

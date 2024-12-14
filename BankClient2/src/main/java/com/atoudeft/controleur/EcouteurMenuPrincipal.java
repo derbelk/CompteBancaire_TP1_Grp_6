@@ -71,11 +71,10 @@ public class EcouteurMenuPrincipal implements ActionListener {
                                 String numeroPort = panneauConfigServeur.getPortServeur();
                                 try {
                                     port = Integer.parseInt(numeroPort);
-                                    JOptionPane.showMessageDialog(panneauConfigServeur, "Okay c'est un int " + numeroPort);
                                     okay = true;
 
                                 } catch (Exception exception) {
-                                    JOptionPane.showMessageDialog(panneauConfigServeur, "Le numéro ne doit pas être String",
+                                    JOptionPane.showMessageDialog(panneauConfigServeur, "Le numéro de port doit être un entier.",
                                             "Choix invalide", JOptionPane.ERROR_MESSAGE);
 
                                     res = JOptionPane.showConfirmDialog(fenetre, panneauConfigServeur, "Configuration Serveur",
@@ -86,7 +85,7 @@ public class EcouteurMenuPrincipal implements ActionListener {
                             }
                         }
                         else {
-                            JOptionPane.showMessageDialog(fenetre,"configuration annullée",
+                            JOptionPane.showMessageDialog(fenetre,"configuration annulée",
                                     "Information",JOptionPane.INFORMATION_MESSAGE);
                             break;
                         }
