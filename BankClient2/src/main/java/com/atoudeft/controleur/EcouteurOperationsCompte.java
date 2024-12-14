@@ -185,6 +185,7 @@ public class EcouteurOperationsCompte implements ActionListener {
            if ("HIST".equals(action)){
 
                client.envoyer("HIST");
+               //MISE À JOUR DU HISTORIQUE.
             }
 
 

@@ -33,7 +33,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
         int i;
         String[] t;
         MainFrame fenetre;
-
+        // UPDATE2.1
         if (source instanceof Connexion) {
             //cnx = (Connexion) source;
             typeEvenement = evenement.getType();
@@ -99,15 +99,12 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     break;
                 case "SELECT" :
                     arg = evenement.getArgument();
-                    String[] arguments = new String[arg.length()];
+                    String[] arguments ;
                     arguments = arg.split(" ");
                     String solde = arguments[arguments.length -1];
                     //Question 3.1
                     if (arg.trim().startsWith("NO")) {
                         break;
-                    }
-                    else {
-
                     }
                     panneauPrincipal.setPanneauOperationsCompte(solde);
                     //JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
